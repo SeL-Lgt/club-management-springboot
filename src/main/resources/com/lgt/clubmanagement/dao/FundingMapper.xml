@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lgt.clubmanagement.dao.FundingMapper">
+  <resultMap id="BaseResultMap" type="com.lgt.clubmanagement.entity.Funding">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="money" jdbcType="DOUBLE" property="money" />
+    <result column="dNumber" jdbcType="VARCHAR" property="dnumber" />
+    <result column="sId" jdbcType="INTEGER" property="sid" />
+    <result column="dDate" jdbcType="TIMESTAMP" property="ddate" />
+    <result column="uNumber" jdbcType="VARCHAR" property="unumber" />
+    <result column="uDate" jdbcType="TIMESTAMP" property="udate" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lgt.clubmanagement.entity.Funding">
+    <result column="introduction" jdbcType="LONGVARCHAR" property="introduction" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, money, dNumber, sId, dDate, uNumber, uDate, status
+  </sql>
+  <sql id="Blob_Column_List">
+    introduction
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.lgt.clubmanagement.entity.FundingExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from funding
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.lgt.clubmanagement.entity.FundingExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from funding
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from funding
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from funding
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lgt.clubmanagement.entity.FundingExample">
+    delete from funding
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lgt.clubmanagement.entity.Funding">
+    insert into funding (id, money, dNumber, 
+      sId, dDate, uNumber, 
+      uDate, status, introduction
+      )
+    values (#{id,jdbcType=INTEGER}, #{money,jdbcType=DOUBLE}, #{dnumber,jdbcType=VARCHAR}, 
+      #{sid,jdbcType=INTEGER}, #{ddate,jdbcType=TIMESTAMP}, #{unumber,jdbcType=VARCHAR}, 
+      #{udate,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{introduction,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lgt.clubmanagement.entity.Funding">
+    insert into funding
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="dnumber != null">
+        dNumber,
+      </if>
+      <if test="sid != null">
+        sId,
+      </if>
+      <if test="ddate != null">
+        dDate,
+      </if>
+      <if test="unumber != null">
+        uNumber,
+      </if>
+      <if test="udate != null">
+        uDate,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="dnumber != null">
+        #{dnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="ddate != null">
+        #{ddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unumber != null">
+        #{unumber,jdbcType=VARCHAR},
+      </if>
+      <if test="udate != null">
+        #{udate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lgt.clubmanagement.entity.FundingExample" resultType="java.lang.Long">
+    select count(*) from funding
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update funding
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.money != null">
+        money = #{record.money,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dnumber != null">
+        dNumber = #{record.dnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sid != null">
+        sId = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ddate != null">
+        dDate = #{record.ddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.unumber != null">
+        uNumber = #{record.unumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.udate != null">
+        uDate = #{record.udate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.introduction != null">
+        introduction = #{record.introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update funding
+    set id = #{record.id,jdbcType=INTEGER},
+      money = #{record.money,jdbcType=DOUBLE},
+      dNumber = #{record.dnumber,jdbcType=VARCHAR},
+      sId = #{record.sid,jdbcType=INTEGER},
+      dDate = #{record.ddate,jdbcType=TIMESTAMP},
+      uNumber = #{record.unumber,jdbcType=VARCHAR},
+      uDate = #{record.udate,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=VARCHAR},
+      introduction = #{record.introduction,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update funding
+    set id = #{record.id,jdbcType=INTEGER},
+      money = #{record.money,jdbcType=DOUBLE},
+      dNumber = #{record.dnumber,jdbcType=VARCHAR},
+      sId = #{record.sid,jdbcType=INTEGER},
+      dDate = #{record.ddate,jdbcType=TIMESTAMP},
+      uNumber = #{record.unumber,jdbcType=VARCHAR},
+      uDate = #{record.udate,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lgt.clubmanagement.entity.Funding">
+    update funding
+    <set>
+      <if test="money != null">
+        money = #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="dnumber != null">
+        dNumber = #{dnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null">
+        sId = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="ddate != null">
+        dDate = #{ddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unumber != null">
+        uNumber = #{unumber,jdbcType=VARCHAR},
+      </if>
+      <if test="udate != null">
+        uDate = #{udate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lgt.clubmanagement.entity.Funding">
+    update funding
+    set money = #{money,jdbcType=DOUBLE},
+      dNumber = #{dnumber,jdbcType=VARCHAR},
+      sId = #{sid,jdbcType=INTEGER},
+      dDate = #{ddate,jdbcType=TIMESTAMP},
+      uNumber = #{unumber,jdbcType=VARCHAR},
+      uDate = #{udate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lgt.clubmanagement.entity.Funding">
+    update funding
+    set money = #{money,jdbcType=DOUBLE},
+      dNumber = #{dnumber,jdbcType=VARCHAR},
+      sId = #{sid,jdbcType=INTEGER},
+      dDate = #{ddate,jdbcType=TIMESTAMP},
+      uNumber = #{unumber,jdbcType=VARCHAR},
+      uDate = #{udate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

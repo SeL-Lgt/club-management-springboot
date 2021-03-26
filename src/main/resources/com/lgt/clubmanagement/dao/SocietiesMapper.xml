@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lgt.clubmanagement.dao.SocietiesMapper">
+  <resultMap id="BaseResultMap" type="com.lgt.clubmanagement.entity.Societies">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sName" jdbcType="VARCHAR" property="sname" />
+    <result column="association" jdbcType="INTEGER" property="association" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="founder" jdbcType="VARCHAR" property="founder" />
+    <result column="instructor" jdbcType="VARCHAR" property="instructor" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="money" jdbcType="DOUBLE" property="money" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lgt.clubmanagement.entity.Societies">
+    <result column="introduction" jdbcType="LONGVARCHAR" property="introduction" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, sName, association, date, founder, instructor, status, money
+  </sql>
+  <sql id="Blob_Column_List">
+    introduction
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.lgt.clubmanagement.entity.SocietiesExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from societies
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.lgt.clubmanagement.entity.SocietiesExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from societies
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from societies
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from societies
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lgt.clubmanagement.entity.SocietiesExample">
+    delete from societies
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lgt.clubmanagement.entity.Societies">
+    insert into societies (id, sName, association, 
+      date, founder, instructor, 
+      status, money, introduction
+      )
+    values (#{id,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, #{association,jdbcType=INTEGER}, 
+      #{date,jdbcType=TIMESTAMP}, #{founder,jdbcType=VARCHAR}, #{instructor,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{money,jdbcType=DOUBLE}, #{introduction,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lgt.clubmanagement.entity.Societies">
+    insert into societies
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="sname != null">
+        sName,
+      </if>
+      <if test="association != null">
+        association,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="founder != null">
+        founder,
+      </if>
+      <if test="instructor != null">
+        instructor,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sname != null">
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="association != null">
+        #{association,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="founder != null">
+        #{founder,jdbcType=VARCHAR},
+      </if>
+      <if test="instructor != null">
+        #{instructor,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lgt.clubmanagement.entity.SocietiesExample" resultType="java.lang.Long">
+    select count(*) from societies
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update societies
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sname != null">
+        sName = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.association != null">
+        association = #{record.association,jdbcType=INTEGER},
+      </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.founder != null">
+        founder = #{record.founder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instructor != null">
+        instructor = #{record.instructor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.money != null">
+        money = #{record.money,jdbcType=DOUBLE},
+      </if>
+      <if test="record.introduction != null">
+        introduction = #{record.introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update societies
+    set id = #{record.id,jdbcType=INTEGER},
+      sName = #{record.sname,jdbcType=VARCHAR},
+      association = #{record.association,jdbcType=INTEGER},
+      date = #{record.date,jdbcType=TIMESTAMP},
+      founder = #{record.founder,jdbcType=VARCHAR},
+      instructor = #{record.instructor,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      money = #{record.money,jdbcType=DOUBLE},
+      introduction = #{record.introduction,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update societies
+    set id = #{record.id,jdbcType=INTEGER},
+      sName = #{record.sname,jdbcType=VARCHAR},
+      association = #{record.association,jdbcType=INTEGER},
+      date = #{record.date,jdbcType=TIMESTAMP},
+      founder = #{record.founder,jdbcType=VARCHAR},
+      instructor = #{record.instructor,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      money = #{record.money,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lgt.clubmanagement.entity.Societies">
+    update societies
+    <set>
+      <if test="sname != null">
+        sName = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="association != null">
+        association = #{association,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="founder != null">
+        founder = #{founder,jdbcType=VARCHAR},
+      </if>
+      <if test="instructor != null">
+        instructor = #{instructor,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lgt.clubmanagement.entity.Societies">
+    update societies
+    set sName = #{sname,jdbcType=VARCHAR},
+      association = #{association,jdbcType=INTEGER},
+      date = #{date,jdbcType=TIMESTAMP},
+      founder = #{founder,jdbcType=VARCHAR},
+      instructor = #{instructor,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DOUBLE},
+      introduction = #{introduction,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lgt.clubmanagement.entity.Societies">
+    update societies
+    set sName = #{sname,jdbcType=VARCHAR},
+      association = #{association,jdbcType=INTEGER},
+      date = #{date,jdbcType=TIMESTAMP},
+      founder = #{founder,jdbcType=VARCHAR},
+      instructor = #{instructor,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
