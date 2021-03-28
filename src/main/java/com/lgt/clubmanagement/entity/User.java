@@ -9,6 +9,8 @@ public class User {
 
     private String name;
 
+    private String classname;
+
     private Integer type;
 
     private Long phone;
@@ -45,6 +47,14 @@ public class User {
         this.name = name == null ? null : name.trim();
     }
 
+    public String getClassname() {
+        return classname;
+    }
+
+    public void setClassname(String classname) {
+        this.classname = classname == null ? null : classname.trim();
+    }
+
     public Integer getType() {
         return type;
     }
@@ -59,5 +69,18 @@ public class User {
 
     public void setPhone(Long phone) {
         this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", number='" + number + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", classname='" + classname + '\'' +
+                ", type=" + type +
+                ", phone=" + phone +
+                '}';
     }
 }

@@ -5,6 +5,30 @@ public class JsonResult {
     private String msg;
     private Integer code;
 
+    public JsonResult() {
+    }
+
+    public JsonResult(Integer code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+
+    public static JsonResult success(Object obj, String msg){
+        JsonResult jr = new JsonResult();
+        jr.setCode(200);
+        jr.setObj(obj);
+        jr.setMsg(msg);
+        return jr;
+    }
+
+    public static JsonResult error(Object obj, String msg) {
+        JsonResult jr = new JsonResult();
+        jr.setCode(500);
+        jr.setObj(obj);
+        jr.setMsg(msg);
+        return jr;
+    }
+
     public Object getObj() {
         return obj;
     }
@@ -28,4 +52,6 @@ public class JsonResult {
     public void setCode(Integer code) {
         this.code = code;
     }
+
+
 }

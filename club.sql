@@ -6,26 +6,27 @@ CREATE TABLE user
     `number`   VARCHAR(20) NOT NULL UNIQUE,
     `password` VARCHAR(50) NOT NULL,
     `name`     VARCHAR(50) NOT NULL,
+    `className`    VARCHAR(50) NOT NULL,
     `type`     INT         NOT NULL,
     `phone`    BIGINT      NOT NULL
-) charset utf8mb4
-  character set utf8mb4;
-INSERT INTO `club`.`user` (`number`, `password`, `name`, `type`, `phone`)
-VALUES ('vas23', '981002', '李国通', '1', '13418958563');
+) CHARSET UTF8MB4
+  CHARACTER SET UTF8MB4;
+INSERT INTO `club`.`user` (`number`, `password`, `name`,`className`, `type`, `phone`)
+VALUES ('vas23', '981002', '李国通', '17软件5班','1', '13418958563');
 
-create table societies
+CREATE TABLE societies
 (
-    id           int         not null auto_increment primary key,
-    sName        varchar(20) not null unique,
-    association  int         not null,
-    introduction text        not null,
-    date         datetime    not null,
-    founder      varchar(20) not null,
-    instructor   varchar(20) not null,
-    status       varchar(4)  not null,
-    money        double      not null
-) char set utf8mb4
-  character set utf8mb4;
+    id           INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    sName        VARCHAR(20) NOT NULL UNIQUE,
+    association  INT         NOT NULL,
+    introduction TEXT        NOT NULL,
+    date         DATETIME    NOT NULL,
+    founder      VARCHAR(20) NOT NULL,
+    instructor   VARCHAR(20) NOT NULL,
+    status       VARCHAR(4)  NOT NULL,
+    money        DOUBLE      NOT NULL
+) CHAR SET UTF8MB4
+  CHARACTER SET UTF8MB4;
 
 create table societiesType
 (
@@ -48,7 +49,8 @@ create table societiesJobType
 (
     id       int         not null primary key,
     typeName varchar(50) not null unique
-);
+) char set utf8mb4
+  character set utf8mb4;
 
 create table activity
 (

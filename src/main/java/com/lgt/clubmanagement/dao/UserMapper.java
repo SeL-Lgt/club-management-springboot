@@ -2,11 +2,13 @@ package com.lgt.clubmanagement.dao;
 
 import com.lgt.clubmanagement.entity.User;
 import com.lgt.clubmanagement.entity.UserExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
-@Repository
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+@Mapper
 public interface UserMapper {
     long countByExample(UserExample example);
 
