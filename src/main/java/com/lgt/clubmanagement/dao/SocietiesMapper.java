@@ -3,8 +3,11 @@ package com.lgt.clubmanagement.dao;
 import com.lgt.clubmanagement.entity.Societies;
 import com.lgt.clubmanagement.entity.SocietiesExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface SocietiesMapper {
     long countByExample(SocietiesExample example);
 

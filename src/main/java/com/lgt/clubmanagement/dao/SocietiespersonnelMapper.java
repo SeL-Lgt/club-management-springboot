@@ -4,8 +4,11 @@ import com.lgt.clubmanagement.entity.Societiespersonnel;
 import com.lgt.clubmanagement.entity.SocietiespersonnelExample;
 import com.lgt.clubmanagement.entity.SocietiespersonnelKey;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface SocietiespersonnelMapper {
     long countByExample(SocietiespersonnelExample example);
 

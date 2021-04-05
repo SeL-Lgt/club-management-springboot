@@ -11,7 +11,7 @@ public interface UserService {
      * @param number
      * @return
      */
-    public Userinfo queryUserByNumber(String number);
+    Userinfo queryUserByNumber(String number);
 
     /**
      * 添加用户信息
@@ -19,7 +19,7 @@ public interface UserService {
      * @param user
      * @return
      */
-    public int addUser(Userinfo user);
+    int addUser(Userinfo user);
 
     /**
      * 查询所有用户信息
@@ -27,7 +27,12 @@ public interface UserService {
      * @param user
      * @return
      */
-    public List<Userinfo> queryUserByAll(Userinfo user);
+    List<Userinfo> queryUserByAll(Userinfo user);
 
-    public int updateUser(Userinfo user);
+    /**
+     * 更新用户信息
+     * @param user
+     * @return
+     */
+    int updateUser(Userinfo user);
 }

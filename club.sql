@@ -121,3 +121,14 @@ create table userInfo
 
 INSERT INTO `club`.`userInfo` (`number`, `password`, `name`, `className`, `type`, `phone`)
 VALUES ('admin', 'admin', '李国通', '17软件5班', '1', '13418958563');
+
+
+INSERT INTO `club`.`societiestype` (`id`, `typeName`) VALUES ('1', '计算机学院');
+INSERT INTO `club`.`societiestype` (`id`, `typeName`) VALUES ('2', '管理学院');
+INSERT INTO `club`.`societiestype` (`id`, `typeName`) VALUES ('3', '外国语学院');
+INSERT INTO `club`.`societiestype` (`id`, `typeName`) VALUES ('4', '财经学院');
+INSERT INTO `club`.`societiestype` (`id`, `typeName`) VALUES ('5', '艺术学院');
+INSERT INTO `club`.`societiestype` (`id`, `typeName`) VALUES ('6', '机电学院');
+INSERT INTO `club`.`societiestype` (`id`, `typeName`) VALUES ('7', '学术类社团');
+INSERT INTO `club`.`societiestype` (`id`, `typeName`) VALUES ('8', '人文类社团');
+INSERT INTO `club`.`societiestype` (`id`, `typeName`) VALUES ('9', '运动类社团');

@@ -37,7 +37,6 @@ public class UserController {
     @ApiOperation(value = "查询用户信息(根据学号)", notes = "获取用户信息")
     @PostMapping("queryUserByNumber")
     public JsonResult queryUserByNumber(String number) {
-        System.out.println(number);
         try {
             Userinfo userDB = userService.queryUserByNumber(number);
             return JsonResult.success(userDB, "查询成功");
@@ -49,7 +48,6 @@ public class UserController {
     @ApiOperation(value = "用户注册", notes = "普通用户注册")
     @PostMapping("registered")
     public JsonResult registered(Userinfo user) {
-        System.out.println(user);
         //普通用户的类型
         user.setType(1);
         try {
