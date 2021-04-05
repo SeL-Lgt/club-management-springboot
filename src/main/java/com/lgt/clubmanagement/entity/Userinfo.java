@@ -1,6 +1,8 @@
 package com.lgt.clubmanagement.entity;
 
-public class User {
+import java.util.ArrayList;
+
+public class Userinfo {
     private Integer id;
 
     private String number;
@@ -71,9 +73,19 @@ public class User {
         this.phone = phone;
     }
 
+    private ArrayList<Societiespersonnel> societiespersonnels;
+
+    public ArrayList<Societiespersonnel> getSocietiespersonnels() {
+        return societiespersonnels;
+    }
+
+    public void setSocietiespersonnels(ArrayList<Societiespersonnel> societiespersonnels) {
+        this.societiespersonnels = societiespersonnels;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
+        return "Userinfo{" +
                 "id=" + id +
                 ", number='" + number + '\'' +
                 ", password='" + password + '\'' +
@@ -81,6 +93,7 @@ public class User {
                 ", classname='" + classname + '\'' +
                 ", type=" + type +
                 ", phone=" + phone +
+                ", societiespersonnels=" + societiespersonnels +
                 '}';
     }
 }

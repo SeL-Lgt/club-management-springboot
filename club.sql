@@ -1,18 +1,5 @@
 create database club char set utf8mb4;
 use club;
-CREATE TABLE user
-(
-    id         INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `number`   VARCHAR(20) NOT NULL UNIQUE,
-    `password` VARCHAR(50) NOT NULL,
-    `name`     VARCHAR(50) NOT NULL,
-    `className`    VARCHAR(50) NOT NULL,
-    `type`     INT         NOT NULL,
-    `phone`    BIGINT      NOT NULL
-) CHARSET UTF8MB4
-  CHARACTER SET UTF8MB4;
-INSERT INTO `club`.`user` (`number`, `password`, `name`,`className`, `type`, `phone`)
-VALUES ('vas23', '981002', '李国通', '17软件5班','1', '13418958563');
 
 CREATE TABLE societies
 (
@@ -119,3 +106,18 @@ create table funding
     status       varchar(4)  not null
 ) char set utf8mb4
   character set utf8mb4;
+  
+create table userInfo
+(
+    id        int         not null primary key auto_increment,
+    number    VARCHAR(20) NOT NULL UNIQUE,
+    password  VARCHAR(50) NOT NULL,
+    name      VARCHAR(50) NOT NULL,
+    className VARCHAR(50) NOT NULL,
+    type      INT         NOT NULL,
+    phone     BIGINT      NOT NULL
+) char set utf8mb4
+  character set utf8mb4; 
+
+INSERT INTO `club`.`userInfo` (`number`, `password`, `name`, `className`, `type`, `phone`)
+VALUES ('admin', 'admin', '李国通', '17软件5班', '1', '13418958563');

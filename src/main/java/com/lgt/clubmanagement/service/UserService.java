@@ -1,6 +1,6 @@
 package com.lgt.clubmanagement.service;
 
-import com.lgt.clubmanagement.entity.User;
+import com.lgt.clubmanagement.entity.Userinfo;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface UserService {
      * @param number
      * @return
      */
-    public User getUserByNumber(String number);
+    public Userinfo queryUserByNumber(String number);
 
     /**
      * 添加用户信息
@@ -19,7 +19,7 @@ public interface UserService {
      * @param user
      * @return
      */
-    public int addUser(User user);
+    public int addUser(Userinfo user);
 
     /**
      * 查询所有用户信息
@@ -27,5 +27,7 @@ public interface UserService {
      * @param user
      * @return
      */
-    public List<User> queryUserByAll(User user);
+    public List<Userinfo> queryUserByAll(Userinfo user);
+
+    public int updateUser(Userinfo user);
 }

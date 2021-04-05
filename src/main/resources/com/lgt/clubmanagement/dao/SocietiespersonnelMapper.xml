@@ -6,6 +6,15 @@
     <id column="uId" jdbcType="INTEGER" property="uid" />
     <id column="job" jdbcType="INTEGER" property="job" />
     <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <association property="userInfo" column="number" javaType="userInfo">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="number" jdbcType="VARCHAR" property="number" />
+      <result column="password" jdbcType="VARCHAR" property="password" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="className" jdbcType="VARCHAR" property="classname" />
+      <result column="type" jdbcType="INTEGER" property="type" />
+      <result column="phone" jdbcType="BIGINT" property="phone" />
+    </association>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>

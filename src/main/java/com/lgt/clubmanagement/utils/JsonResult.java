@@ -1,7 +1,7 @@
 package com.lgt.clubmanagement.utils;
 
 public class JsonResult {
-    private Object obj;
+    private Object data;
     private String msg;
     private Integer code;
 
@@ -13,28 +13,28 @@ public class JsonResult {
         this.msg = msg;
     }
 
-    public static JsonResult success(Object obj, String msg){
+    public static JsonResult success(Object data, String msg) {
         JsonResult jr = new JsonResult();
         jr.setCode(200);
-        jr.setObj(obj);
+        jr.setData(data);
         jr.setMsg(msg);
         return jr;
     }
 
-    public static JsonResult error(Object obj, String msg) {
+    public static JsonResult error(Object data, String msg) {
         JsonResult jr = new JsonResult();
         jr.setCode(500);
-        jr.setObj(obj);
+        jr.setData(data);
         jr.setMsg(msg);
         return jr;
     }
 
-    public Object getObj() {
-        return obj;
+    public Object getData() {
+        return data;
     }
 
-    public void setObj(Object obj) {
-        this.obj = obj;
+    public void setData(Object data) {
+        this.data = data;
     }
 
     public String getMsg() {
