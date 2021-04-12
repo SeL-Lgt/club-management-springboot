@@ -1,5 +1,6 @@
 package com.lgt.clubmanagement.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.lgt.clubmanagement.entity.Societies;
 import com.lgt.clubmanagement.entity.Societiestype;
 import com.lgt.clubmanagement.service.SocietiesService;
@@ -8,10 +9,7 @@ import com.lgt.clubmanagement.utils.JsonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -46,6 +44,17 @@ public class SocietiesController {
         try {
             Integer value = societiesService.addSocieties(societies);
             return JsonResult.success(value, "创建成功");
+        } catch (Exception e) {
+            return JsonResult.error("", e.toString());
+        }
+    }
+
+    @ApiOperation(value = "查询所有社团")
+    @GetMapping("getSocietiesByAll")
+    public JsonResult getSocietiesByAll() {
+        try {
+            List<Societies> societies = societiesService.querySocietiesByAll();
+            return JsonResult.success(societies, "查询成功");
         } catch (Exception e) {
             return JsonResult.error("", e.toString());
         }

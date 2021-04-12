@@ -31,6 +31,10 @@ public class SocietiesServiceImpl implements SocietiesService {
     @Override
     public List<Societies> querySocietiesByAll() {
         SocietiesExample example = new SocietiesExample();
+        SocietiesExample.Criteria criteria = example.createCriteria();
+        // 1为同意创建 0为不同意
+        // 查询允许创建的
+        criteria.andStatusEqualTo("1");
         return societiesMapper.selectByExample(example);
     }
 
@@ -64,6 +68,7 @@ public class SocietiesServiceImpl implements SocietiesService {
     @Override
     public List<Societiestype> querySocietiesType() {
         SocietiestypeExample example = new SocietiestypeExample();
+        example.setOrderByClause("id asc");
         return societiestypeMapper.selectByExample(example);
     }
 
