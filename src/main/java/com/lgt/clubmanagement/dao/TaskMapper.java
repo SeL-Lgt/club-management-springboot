@@ -3,8 +3,11 @@ package com.lgt.clubmanagement.dao;
 import com.lgt.clubmanagement.entity.Task;
 import com.lgt.clubmanagement.entity.TaskExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface TaskMapper {
     long countByExample(TaskExample example);
 

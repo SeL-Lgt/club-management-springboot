@@ -92,4 +92,19 @@ public class Societies {
     public void setIntroduction(String introduction) {
         this.introduction = introduction == null ? null : introduction.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Societies{" +
+                "id=" + id +
+                ", sname='" + sname + '\'' +
+                ", association=" + association +
+                ", date=" + date +
+                ", founder='" + founder + '\'' +
+                ", instructor='" + instructor + '\'' +
+                ", status='" + status + '\'' +
+                ", money=" + money +
+                ", introduction='" + introduction + '\'' +
+                '}';
+    }
 }

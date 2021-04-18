@@ -4,8 +4,11 @@ import com.lgt.clubmanagement.entity.Activity;
 import com.lgt.clubmanagement.entity.ActivityExample;
 import com.lgt.clubmanagement.entity.ActivityKey;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface ActivityMapper {
     long countByExample(ActivityExample example);
 

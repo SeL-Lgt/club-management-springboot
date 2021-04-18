@@ -1,5 +1,8 @@
 package com.lgt.clubmanagement.entity;
 
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
 public class SocietiespersonnelKey {
     private Integer sid;
 
@@ -29,5 +32,14 @@ public class SocietiespersonnelKey {
 
     public void setJob(Integer job) {
         this.job = job;
+    }
+
+    @Override
+    public String toString() {
+        return "SocietiespersonnelKey{" +
+                "sid=" + sid +
+                ", uid=" + uid +
+                ", job=" + job +
+                '}';
     }
 }

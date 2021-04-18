@@ -3,8 +3,11 @@ package com.lgt.clubmanagement.dao;
 import com.lgt.clubmanagement.entity.Activitytype;
 import com.lgt.clubmanagement.entity.ActivitytypeExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface ActivitytypeMapper {
     long countByExample(ActivitytypeExample example);
 

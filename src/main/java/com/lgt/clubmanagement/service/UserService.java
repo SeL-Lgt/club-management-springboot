@@ -5,6 +5,15 @@ import com.lgt.clubmanagement.entity.Userinfo;
 import java.util.List;
 
 public interface UserService {
+
+    /**
+     * 根据Id查用户信息
+     * @param id
+     * @return
+     */
+    Userinfo queryUserById(Integer id);
+
+
     /**
      * 根据用户学号查用户信息
      *

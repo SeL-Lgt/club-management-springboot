@@ -3,15 +3,16 @@ use club;
 
 CREATE TABLE societies
 (
-    id           INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    sName        VARCHAR(20) NOT NULL UNIQUE,
-    association  INT         NOT NULL,
+    id           INT         NOT NULL AUTO_INCREMENT primary key,
+    sName        VARCHAR(20) NOT NULL,
+    association  INT     4   NOT NULL,
     introduction TEXT        NOT NULL,
     date         DATETIME    NOT NULL,
     founder      VARCHAR(20) NOT NULL,
     instructor   VARCHAR(20) NOT NULL,
     status       VARCHAR(4)  NOT NULL,
-    money        DOUBLE      NOT NULL
+    money        DOUBLE      NOT NULL,
+    unique index (`sName`, `association`)
 ) CHAR SET UTF8MB4
   CHARACTER SET UTF8MB4;
 
@@ -106,7 +107,7 @@ create table funding
     status       varchar(4)  not null
 ) char set utf8mb4
   character set utf8mb4;
-  
+
 create table userInfo
 (
     id        int         not null primary key auto_increment,
@@ -117,18 +118,31 @@ create table userInfo
     type      INT         NOT NULL,
     phone     BIGINT      NOT NULL
 ) char set utf8mb4
-  character set utf8mb4; 
+  character set utf8mb4;
 
 INSERT INTO `club`.`userInfo` (`number`, `password`, `name`, `className`, `type`, `phone`)
 VALUES ('admin', 'admin', '李国通', '17软件5班', '1', '13418958563');
 
 
-INSERT INTO `club`.`societiestype` (`id`, `typeName`) VALUES ('1', '计算机学院');
-INSERT INTO `club`.`societiestype` (`id`, `typeName`) VALUES ('2', '管理学院');
-INSERT INTO `club`.`societiestype` (`id`, `typeName`) VALUES ('3', '外国语学院');
-INSERT INTO `club`.`societiestype` (`id`, `typeName`) VALUES ('4', '财经学院');
-INSERT INTO `club`.`societiestype` (`id`, `typeName`) VALUES ('5', '艺术学院');
-INSERT INTO `club`.`societiestype` (`id`, `typeName`) VALUES ('6', '机电学院');
-INSERT INTO `club`.`societiestype` (`id`, `typeName`) VALUES ('7', '学术类社团');
-INSERT INTO `club`.`societiestype` (`id`, `typeName`) VALUES ('8', '人文类社团');
-INSERT INTO `club`.`societiestype` (`id`, `typeName`) VALUES ('9', '运动类社团');
+INSERT INTO `club`.`societiestype` (`id`, `typeName`)
+VALUES ('1', '计算机学院');
+INSERT INTO `club`.`societiestype` (`id`, `typeName`)
+VALUES ('2', '管理学院');
+INSERT INTO `club`.`societiestype` (`id`, `typeName`)
+VALUES ('3', '外国语学院');
+INSERT INTO `club`.`societiestype` (`id`, `typeName`)
+VALUES ('4', '财经学院');
+INSERT INTO `club`.`societiestype` (`id`, `typeName`)
+VALUES ('5', '艺术学院');
+INSERT INTO `club`.`societiestype` (`id`, `typeName`)
+VALUES ('6', '机电学院');
+INSERT INTO `club`.`societiestype` (`id`, `typeName`)
+VALUES ('7', '学术类社团');
+INSERT INTO `club`.`societiestype` (`id`, `typeName`)
+VALUES ('8', '人文类社团');
+INSERT INTO `club`.`societiestype` (`id`, `typeName`)
+VALUES ('9', '运动类社团');
+
+INSERT INTO `club`.`societiesjobtype` (`id`, `typeName`) VALUES ('1', '社员');
+INSERT INTO `club`.`societiesjobtype` (`id`, `typeName`) VALUES ('2', '社长');
+INSERT INTO `club`.`societiesjobtype` (`id`, `typeName`) VALUES ('3', '指导老师');

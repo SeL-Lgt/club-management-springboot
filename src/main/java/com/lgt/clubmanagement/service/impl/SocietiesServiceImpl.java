@@ -39,10 +39,13 @@ public class SocietiesServiceImpl implements SocietiesService {
     }
 
     @Override
-    public Societies querySocietiesByCondition(Societies societies) {
+    public List<Societies> querySocietiesByCondition(Societies societies) {
         SocietiesExample example = new SocietiesExample();
         SocietiesExample.Criteria criteria = example.createCriteria();
 
+        if (societies.getId() != null && !societies.getId().equals("")) {
+            criteria.andIdEqualTo(societies.getId());
+        }
         if (societies.getSname() != null && !societies.getSname().equals("")) {
             criteria.andSnameLike("%" + societies.getSname() + "%");
         }
@@ -56,12 +59,13 @@ public class SocietiesServiceImpl implements SocietiesService {
             criteria.andInstructorEqualTo(societies.getInstructor());
         }
 
-        return societiesMapper.selectByExample(example).get(0);
+        return societiesMapper.selectByExample(example);
     }
 
     @Override
     public List<Societiesjobtype> querySocietiesJobType() {
         SocietiesjobtypeExample example = new SocietiesjobtypeExample();
+        example.setOrderByClause("id asc");
         return societiesjobtypeMapper.selectByExample(example);
     }
 
@@ -73,8 +77,7 @@ public class SocietiesServiceImpl implements SocietiesService {
     }
 
     @Override
-    public List<Societiespersonnel> querySocietiesPersonnel(Integer sId) {
-        SocietiespersonnelExample example = new SocietiespersonnelExample();
-        return societiespersonnelMapper.selectByExample(example);
+    public int updateSocietiesInfo(Societies societies) {
+        return societiesMapper.updateByPrimaryKey(societies);
     }
 }

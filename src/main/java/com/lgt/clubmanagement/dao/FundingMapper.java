@@ -3,8 +3,11 @@ package com.lgt.clubmanagement.dao;
 import com.lgt.clubmanagement.entity.Funding;
 import com.lgt.clubmanagement.entity.FundingExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface FundingMapper {
     long countByExample(FundingExample example);
 

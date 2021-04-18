@@ -19,7 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig implements WebMvcConfigurer {
     @Bean
     public Docket getUserDocket() {
-        Contact contact = new Contact("lgt", "localhost:8081", "122790345@qq.com");
+        Contact contact = new Contact("lgt", "localhost:9090", "122790345@qq.com");
         ApiInfo apiInfo = new ApiInfoBuilder()
                 .title("用户管理")//api标题
                 .description("用户管理相关接口描述")//api描述

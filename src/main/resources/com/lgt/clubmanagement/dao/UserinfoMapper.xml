@@ -9,12 +9,12 @@
         <result column="className" jdbcType="VARCHAR" property="classname"/>
         <result column="type" jdbcType="INTEGER" property="type"/>
         <result column="phone" jdbcType="BIGINT" property="phone"/>
-        <collection property="societiespersonnels" ofType="com.lgt.clubmanagement.entity.Societiespersonnel">
-            <id column="sId" property="sId"/>
-            <id column="uId" property="uId"/>
-            <id column="job" property="job"/>
-            <result column="date" property="date"/>
-        </collection>
+        <!--        <collection property="societiespersonnels" ofType="com.lgt.clubmanagement.entity.Societiespersonnel">-->
+        <!--            <id column="sId" property="sId"/>-->
+        <!--            <id column="uId" property="uId"/>-->
+        <!--            <id column="job" property="job"/>-->
+        <!--            <result column="date" property="date"/>-->
+        <!--        </collection>-->
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>

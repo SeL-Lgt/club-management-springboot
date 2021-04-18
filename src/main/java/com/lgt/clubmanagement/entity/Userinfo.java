@@ -1,6 +1,7 @@
 package com.lgt.clubmanagement.entity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Userinfo {
     private Integer id;
@@ -16,6 +17,8 @@ public class Userinfo {
     private Integer type;
 
     private Long phone;
+
+    private List<Societiespersonnel> societiesPersonnel;
 
     public Integer getId() {
         return id;
@@ -73,14 +76,12 @@ public class Userinfo {
         this.phone = phone;
     }
 
-    private ArrayList<Societiespersonnel> societiespersonnels;
-
-    public ArrayList<Societiespersonnel> getSocietiespersonnels() {
-        return societiespersonnels;
+    public List<Societiespersonnel> getSocietiesPersonnel() {
+        return societiesPersonnel;
     }
 
-    public void setSocietiespersonnels(ArrayList<Societiespersonnel> societiespersonnels) {
-        this.societiespersonnels = societiespersonnels;
+    public void setSocietiesPersonnel(List<Societiespersonnel> societiesPersonnel) {
+        this.societiesPersonnel = societiesPersonnel;
     }
 
     @Override
@@ -93,7 +94,7 @@ public class Userinfo {
                 ", classname='" + classname + '\'' +
                 ", type=" + type +
                 ", phone=" + phone +
-                ", societiespersonnels=" + societiespersonnels +
+                ", societiesPersonnel=" + societiesPersonnel +
                 '}';
     }
 }

@@ -15,6 +15,15 @@ public class UserServiceImpl implements UserService {
     private UserinfoMapper userinfoMapper;
 
     @Override
+    public Userinfo queryUserById(Integer id) {
+        UserinfoExample example = new UserinfoExample();
+        UserinfoExample.Criteria criteria = example.createCriteria();
+
+        criteria.andIdEqualTo(id);
+        return userinfoMapper.selectByExample(example).get(0);
+    }
+
+    @Override
     public Userinfo queryUserByNumber(String number) {
         UserinfoExample example = new UserinfoExample();
         UserinfoExample.Criteria criteria = example.createCriteria();

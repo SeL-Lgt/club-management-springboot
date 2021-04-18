@@ -24,12 +24,12 @@ public interface SocietiesService {
     List<Societies> querySocietiesByAll();
 
     /**
-     * 查询单一社团信息
+     * 查询社团信息
      *
      * @param societies
      * @return
      */
-    Societies querySocietiesByCondition(Societies societies);
+    List<Societies> querySocietiesByCondition(Societies societies);
 
     /**
      * 查询社团职位列表
@@ -46,11 +46,10 @@ public interface SocietiesService {
     List<Societiestype> querySocietiesType();
 
     /**
-     * 查询社团人数及信息
-     *
-     * @param sId
+     * 更新社团信息
+     * @param societies
      * @return
      */
-    List<Societiespersonnel> querySocietiesPersonnel(Integer sId);
+    int updateSocietiesInfo(Societies societies);
 
 }

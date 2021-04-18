@@ -1,6 +1,10 @@
 package com.lgt.clubmanagement.controller;
 
+import com.lgt.clubmanagement.entity.Societies;
+import com.lgt.clubmanagement.entity.Societiespersonnel;
 import com.lgt.clubmanagement.entity.Userinfo;
+import com.lgt.clubmanagement.service.SocietiesPersonnelService;
+import com.lgt.clubmanagement.service.SocietiesService;
 import com.lgt.clubmanagement.service.UserService;
 import com.lgt.clubmanagement.utils.JsonResult;
 import io.swagger.annotations.Api;
@@ -19,6 +23,10 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private SocietiesPersonnelService societiesPersonnelService;
+    @Autowired
+    private SocietiesService societiesService;
 
     @ApiOperation(value = "用户登录", notes = "获取用户登录信息")
     @PostMapping("login")
@@ -28,6 +36,17 @@ public class UserController {
             if (!userDB.getPassword().equals(user.getPassword())) {
                 return JsonResult.error("", "密码不正确");
             }
+            //查询所属社团
+            Integer uId = userDB.getId();
+            Societiespersonnel societiesPersonnel = new Societiespersonnel();
+            societiesPersonnel.setUid(uId);
+            List<Societiespersonnel> list = societiesPersonnelService.querySocietiesPersonnelByOne(societiesPersonnel);
+            for (int i = 0; i < list.size(); i++) {
+                Societies temp = new Societies();
+                temp.setId(list.get(i).getSid());
+                list.get(i).setSocieties(societiesService.querySocietiesByCondition(temp).get(0));
+            }
+            userDB.setSocietiesPersonnel(list);
             return JsonResult.success(userDB, "登录成功");
         } catch (Exception e) {
             return JsonResult.error("", e.toString());
@@ -39,6 +58,19 @@ public class UserController {
     public JsonResult queryUserByNumber(String number) {
         try {
             Userinfo userDB = userService.queryUserByNumber(number);
+
+            //查询所属社团
+            Integer uId = userDB.getId();
+            Societiespersonnel societiesPersonnel = new Societiespersonnel();
+            societiesPersonnel.setUid(uId);
+            List<Societiespersonnel> list = societiesPersonnelService.querySocietiesPersonnelByOne(societiesPersonnel);
+            for (int i = 0; i < list.size(); i++) {
+                Societies temp = new Societies();
+                temp.setId(list.get(i).getSid());
+                list.get(i).setSocieties(societiesService.querySocietiesByCondition(temp).get(0));
+            }
+            userDB.setSocietiesPersonnel(list);
+
             return JsonResult.success(userDB, "查询成功");
         } catch (Exception e) {
             return JsonResult.error("", e.toString());
