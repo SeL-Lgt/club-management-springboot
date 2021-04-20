@@ -23,6 +23,13 @@ public interface UserService {
     Userinfo queryUserByNumber(String number);
 
     /**
+     * 模糊查询
+     * @param userinfo
+     * @return
+     */
+    List<Userinfo> queryUserByExample(Userinfo userinfo);
+
+    /**
      * 添加用户信息
      *
      * @param user

@@ -2,6 +2,8 @@ package com.lgt.clubmanagement.controller;
 
 import com.lgt.clubmanagement.entity.Societies;
 import com.lgt.clubmanagement.entity.Societiespersonnel;
+import com.lgt.clubmanagement.entity.SocietiespersonnelKey;
+import com.lgt.clubmanagement.entity.Userinfo;
 import com.lgt.clubmanagement.service.SocietiesPersonnelService;
 import com.lgt.clubmanagement.service.SocietiesService;
 import com.lgt.clubmanagement.service.UserService;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.spring.web.json.Json;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -49,14 +52,45 @@ public class SocietiesPersonnelController {
     @PostMapping("querySocietiesPersonnelByOne")
     public JsonResult querySocietiesPersonnelByOne(Societiespersonnel societiespersonnel) {
         try {
-            List<Societiespersonnel> list = societiesPersonnelService.querySocietiesPersonnelByOne(societiespersonnel);
+            List<Societiespersonnel> list = societiesPersonnelService.querySocietiesPersonnelByOne(societiespersonnel, null, null);
             for (int i = 0; i < list.size(); i++) {
                 Societies temp = new Societies();
                 temp.setId(list.get(i).getSid());
-                System.out.println("+++++++++++++++++"+list.get(i).getSid());
                 list.get(i).setSocieties(societiesService.querySocietiesByCondition(temp).get(0));
                 list.get(i).setUserinfo(userService.queryUserById(list.get(i).getUid()));
             }
+            return JsonResult.success(list, "查询成功");
+        } catch (Exception e) {
+            return JsonResult.error(e, "查询失败");
+        }
+    }
+
+    @ApiOperation(value = "模糊查询社团成员")
+    @PostMapping("querySocietiesPersonnelByExample")
+    public JsonResult querySocietiesPersonnelByExample(Integer sid, Integer job, String startTime, String endTime, String name) {
+        try {
+            Userinfo userinfo = new Userinfo();
+            userinfo.setName(name);
+            Date start = null;
+            Date end = null;
+            if (!startTime.equals("") && startTime != null) {
+                start = DateUtil.parseDate(startTime, DateUtil.DEFAULT_FORMAT);
+                System.out.println(startTime);
+            }
+            if (!endTime.equals("") && endTime != null) {
+                end = DateUtil.parseDate(endTime, DateUtil.DEFAULT_FORMAT);
+                System.out.println(endTime);
+            }
+            List<Userinfo> list = userService.queryUserByExample(userinfo);
+            for (int i = 0; i < list.size(); i++) {
+                Societiespersonnel societiespersonnel = new Societiespersonnel();
+                societiespersonnel.setUid(list.get(i).getId());
+                societiespersonnel.setSid(sid);
+                societiespersonnel.setJob(job);
+                List<Societiespersonnel> sList = societiesPersonnelService.querySocietiesPersonnelByOne(societiespersonnel, start, end);
+                list.get(i).setSocietiesPersonnel(sList);
+            }
+
             return JsonResult.success(list, "查询成功");
         } catch (Exception e) {
             return JsonResult.error(e, "查询失败");

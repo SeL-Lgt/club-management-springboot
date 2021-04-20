@@ -7,6 +7,7 @@ import com.lgt.clubmanagement.service.SocietiesPersonnelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,7 +22,7 @@ public class SocietiesPersonnelServiceImpl implements SocietiesPersonnelService 
     }
 
     @Override
-    public List<Societiespersonnel> querySocietiesPersonnelByOne(Societiespersonnel societiespersonnel) {
+    public List<Societiespersonnel> querySocietiesPersonnelByOne(Societiespersonnel societiespersonnel, Date startTime, Date endTime) {
         SocietiespersonnelExample example = new SocietiespersonnelExample();
         SocietiespersonnelExample.Criteria criteria = example.createCriteria();
 
@@ -29,10 +30,14 @@ public class SocietiesPersonnelServiceImpl implements SocietiesPersonnelService 
             criteria.andSidEqualTo(societiespersonnel.getSid());
         }
         if (societiespersonnel.getUid() != null && !societiespersonnel.getUid().equals("")) {
-            criteria.andSidEqualTo(societiespersonnel.getUid());
+            criteria.andUidEqualTo(societiespersonnel.getUid());
         }
         if (societiespersonnel.getJob() != null && !societiespersonnel.getJob().equals("")) {
-            criteria.andSidEqualTo(societiespersonnel.getJob());
+            criteria.andJobEqualTo(societiespersonnel.getJob());
+        }
+
+        if (startTime != null && endTime != null) {
+            criteria.andDateBetween(startTime, endTime);
         }
         return societiespersonnelMapper.selectByExample(example);
     }

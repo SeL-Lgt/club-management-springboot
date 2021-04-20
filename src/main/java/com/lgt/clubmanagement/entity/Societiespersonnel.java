@@ -1,11 +1,14 @@
 package com.lgt.clubmanagement.entity;
 
+import jdk.jfr.DataAmount;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 @Mapper
 public class Societiespersonnel extends SocietiespersonnelKey {
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     private Userinfo userinfo;

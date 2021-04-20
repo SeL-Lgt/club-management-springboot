@@ -2,6 +2,7 @@ package com.lgt.clubmanagement.service;
 
 import com.lgt.clubmanagement.entity.Societiespersonnel;
 
+import java.util.Date;
 import java.util.List;
 
 public interface SocietiesPersonnelService {
@@ -20,7 +21,7 @@ public interface SocietiesPersonnelService {
      * @param societiespersonnel
      * @return
      */
-    List<Societiespersonnel> querySocietiesPersonnelByOne(Societiespersonnel societiespersonnel);
+    List<Societiespersonnel> querySocietiesPersonnelByOne(Societiespersonnel societiespersonnel, Date startTime,Date endTime);
 
     /**
      * 查询相应社团所有成员

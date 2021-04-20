@@ -40,7 +40,7 @@ public class UserController {
             Integer uId = userDB.getId();
             Societiespersonnel societiesPersonnel = new Societiespersonnel();
             societiesPersonnel.setUid(uId);
-            List<Societiespersonnel> list = societiesPersonnelService.querySocietiesPersonnelByOne(societiesPersonnel);
+            List<Societiespersonnel> list = societiesPersonnelService.querySocietiesPersonnelByOne(societiesPersonnel,null,null);
             for (int i = 0; i < list.size(); i++) {
                 Societies temp = new Societies();
                 temp.setId(list.get(i).getSid());
@@ -63,7 +63,7 @@ public class UserController {
             Integer uId = userDB.getId();
             Societiespersonnel societiesPersonnel = new Societiespersonnel();
             societiesPersonnel.setUid(uId);
-            List<Societiespersonnel> list = societiesPersonnelService.querySocietiesPersonnelByOne(societiesPersonnel);
+            List<Societiespersonnel> list = societiesPersonnelService.querySocietiesPersonnelByOne(societiesPersonnel,null,null);
             for (int i = 0; i < list.size(); i++) {
                 Societies temp = new Societies();
                 temp.setId(list.get(i).getSid());

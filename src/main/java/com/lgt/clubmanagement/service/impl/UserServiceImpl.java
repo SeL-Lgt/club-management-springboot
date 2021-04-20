@@ -29,8 +29,26 @@ public class UserServiceImpl implements UserService {
         UserinfoExample.Criteria criteria = example.createCriteria();
 
         criteria.andNumberEqualTo(number);
-        System.out.println(example.toString());
+
         return userinfoMapper.selectByExample(example).get(0);
+    }
+
+    @Override
+    public List<Userinfo> queryUserByExample(Userinfo userinfo) {
+        UserinfoExample example = new UserinfoExample();
+        UserinfoExample.Criteria criteria = example.createCriteria();
+
+        if (userinfo.getId() != null && !userinfo.getId().equals("")) {
+            criteria.andIdEqualTo(userinfo.getId());
+        }
+        if (userinfo.getNumber() != null && !userinfo.getNumber().equals("")) {
+            criteria.andNumberEqualTo(userinfo.getNumber());
+        }
+        if (userinfo.getName() != null && !userinfo.getName().equals("")) {
+            criteria.andNameLike("%"+userinfo.getName()+"%");
+        }
+
+        return userinfoMapper.selectByExample(example);
     }
 
     @Override

@@ -35,7 +35,7 @@ public class SocietiesServiceImpl implements SocietiesService {
         // 1为同意创建 0为不同意
         // 查询允许创建的
         criteria.andStatusEqualTo("1");
-        return societiesMapper.selectByExample(example);
+        return societiesMapper.selectByExampleWithBLOBs(example);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class SocietiesServiceImpl implements SocietiesService {
             criteria.andInstructorEqualTo(societies.getInstructor());
         }
 
-        return societiesMapper.selectByExample(example);
+        return societiesMapper.selectByExampleWithBLOBs(example);
     }
 
     @Override
@@ -78,6 +78,6 @@ public class SocietiesServiceImpl implements SocietiesService {
 
     @Override
     public int updateSocietiesInfo(Societies societies) {
-        return societiesMapper.updateByPrimaryKey(societies);
+        return societiesMapper.updateByPrimaryKeySelective(societies);
     }
 }

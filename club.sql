@@ -5,7 +5,7 @@ CREATE TABLE societies
 (
     id           INT         NOT NULL AUTO_INCREMENT primary key,
     sName        VARCHAR(20) NOT NULL,
-    association  INT     4   NOT NULL,
+    association  INT         NOT NULL,
     introduction TEXT        NOT NULL,
     date         DATETIME    NOT NULL,
     founder      VARCHAR(20) NOT NULL,
@@ -25,10 +25,11 @@ create table societiesType
 
 create table societiesPersonnel
 (
-    sId  int      not null,
-    uId  int      not null,
-    job  int      not null,
-    date datetime not null,
+    sId    int      not null,
+    uId    int      not null,
+    job    int      not null,
+    date   datetime not null,
+    status int      not null default 0,
     primary key (`sId`, `uId`, `job`)
 ) char set utf8mb4
   character set utf8mb4;
@@ -90,7 +91,9 @@ create table task
     publisher    varchar(50) not null,
     number       varchar(20) not null,
     introduction text,
-    date         datetime    not null
+    date         datetime    not null,
+    status       int         not null,
+    type         int         not null
 ) char set utf8mb4
   character set utf8mb4;
 
@@ -143,6 +146,9 @@ VALUES ('8', '人文类社团');
 INSERT INTO `club`.`societiestype` (`id`, `typeName`)
 VALUES ('9', '运动类社团');
 
-INSERT INTO `club`.`societiesjobtype` (`id`, `typeName`) VALUES ('1', '社员');
-INSERT INTO `club`.`societiesjobtype` (`id`, `typeName`) VALUES ('2', '社长');
-INSERT INTO `club`.`societiesjobtype` (`id`, `typeName`) VALUES ('3', '指导老师');
+INSERT INTO `club`.`societiesjobtype` (`id`, `typeName`)
+VALUES ('1', '社员');
+INSERT INTO `club`.`societiesjobtype` (`id`, `typeName`)
+VALUES ('2', '社长');
+INSERT INTO `club`.`societiesjobtype` (`id`, `typeName`)
+VALUES ('3', '指导老师');

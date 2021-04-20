@@ -39,13 +39,13 @@ public class SocietiesController {
         }
     }
 
-    @ApiOperation(value="获取职位类型")
+    @ApiOperation(value = "获取职位类型")
     @GetMapping("getSocietiesJobs")
-    public JsonResult getSocietiesJobs(){
-        try{
+    public JsonResult getSocietiesJobs() {
+        try {
             List<Societiesjobtype> list = societiesService.querySocietiesJobType();
-            return JsonResult.success(list,"查询职位类型");
-        }catch (Exception e){
+            return JsonResult.success(list, "查询职位类型");
+        } catch (Exception e) {
             return JsonResult.error("", e.toString());
         }
     }
@@ -102,6 +102,7 @@ public class SocietiesController {
     @PostMapping("updateSocietiesInfo")
     public JsonResult updateSocietiesInfo(Societies societies) {
         try {
+            System.out.println(societies);
             Integer value = societiesService.updateSocietiesInfo(societies);
             return JsonResult.success(value, "修改成功");
         } catch (Exception e) {
