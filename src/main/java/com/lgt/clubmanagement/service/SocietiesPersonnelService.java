@@ -19,9 +19,11 @@ public interface SocietiesPersonnelService {
      * 根据职位降序
      *
      * @param societiespersonnel
+     * @param startTime
+     * @param endTime
      * @return
      */
-    List<Societiespersonnel> querySocietiesPersonnelByOne(Societiespersonnel societiespersonnel, Date startTime,Date endTime);
+    List<Societiespersonnel> querySocietiesPersonnelByExample(Societiespersonnel societiespersonnel, Date startTime, Date endTime);
 
     /**
      * 查询相应社团所有成员

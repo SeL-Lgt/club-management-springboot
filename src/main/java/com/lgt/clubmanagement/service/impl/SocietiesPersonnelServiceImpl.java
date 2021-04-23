@@ -22,7 +22,7 @@ public class SocietiesPersonnelServiceImpl implements SocietiesPersonnelService 
     }
 
     @Override
-    public List<Societiespersonnel> querySocietiesPersonnelByOne(Societiespersonnel societiespersonnel, Date startTime, Date endTime) {
+    public List<Societiespersonnel> querySocietiesPersonnelByExample(Societiespersonnel societiespersonnel, Date startTime, Date endTime) {
         SocietiespersonnelExample example = new SocietiespersonnelExample();
         SocietiespersonnelExample.Criteria criteria = example.createCriteria();
 

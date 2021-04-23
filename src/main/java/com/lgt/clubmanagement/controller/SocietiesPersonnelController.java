@@ -1,11 +1,9 @@
 package com.lgt.clubmanagement.controller;
 
-import com.lgt.clubmanagement.entity.Societies;
-import com.lgt.clubmanagement.entity.Societiespersonnel;
-import com.lgt.clubmanagement.entity.SocietiespersonnelKey;
-import com.lgt.clubmanagement.entity.Userinfo;
+import com.lgt.clubmanagement.entity.*;
 import com.lgt.clubmanagement.service.SocietiesPersonnelService;
 import com.lgt.clubmanagement.service.SocietiesService;
+import com.lgt.clubmanagement.service.TaskService;
 import com.lgt.clubmanagement.service.UserService;
 import com.lgt.clubmanagement.utils.DateUtil;
 import com.lgt.clubmanagement.utils.JsonResult;
@@ -32,14 +30,27 @@ public class SocietiesPersonnelController {
     private SocietiesService societiesService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private TaskService taskService;
 
     @ApiOperation(value = "添加社团成员")
     @PostMapping("addSocietiesPersonnel")
-    public JsonResult addSocietiesPersonnel(Societiespersonnel societiespersonnel) {
+    public JsonResult addSocietiesPersonnel(Societiespersonnel societiespersonnel, String name) {
+        // 1:社团成员
         societiespersonnel.setJob(1);
+        //社团成员状态：未允许加入
+        societiespersonnel.setStatus(0);
         Date data = new Date();
         societiespersonnel.setDate(DateUtil.parseDate(DateUtil.format(data, DateUtil.DEFAULT_FORMAT), DateUtil.DEFAULT_FORMAT));
 
+        // 添加至事务
+        // 是否允许加入社团
+        Task task = new Task();
+        task.setName(name + "申请加入社团");
+        // 事务类型：1、申请加入社团。2、申请创建社团。3、经费申请。4、社团任务
+        task.setType(1);
+        // 发布人
+//        task.setPublisher(societiespersonnel.getUid());
         try {
             societiesPersonnelService.addSocietiesPersonnel(societiespersonnel);
             return JsonResult.success("", "添加成功");
@@ -52,7 +63,7 @@ public class SocietiesPersonnelController {
     @PostMapping("querySocietiesPersonnelByOne")
     public JsonResult querySocietiesPersonnelByOne(Societiespersonnel societiespersonnel) {
         try {
-            List<Societiespersonnel> list = societiesPersonnelService.querySocietiesPersonnelByOne(societiespersonnel, null, null);
+            List<Societiespersonnel> list = societiesPersonnelService.querySocietiesPersonnelByExample(societiespersonnel, null, null);
             for (int i = 0; i < list.size(); i++) {
                 Societies temp = new Societies();
                 temp.setId(list.get(i).getSid());
@@ -87,7 +98,7 @@ public class SocietiesPersonnelController {
                 societiespersonnel.setUid(list.get(i).getId());
                 societiespersonnel.setSid(sid);
                 societiespersonnel.setJob(job);
-                List<Societiespersonnel> sList = societiesPersonnelService.querySocietiesPersonnelByOne(societiespersonnel, start, end);
+                List<Societiespersonnel> sList = societiesPersonnelService.querySocietiesPersonnelByExample(societiespersonnel, start, end);
                 list.get(i).setSocietiesPersonnel(sList);
             }
 

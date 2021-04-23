@@ -8,6 +8,8 @@
     <result column="publisher" jdbcType="VARCHAR" property="publisher" />
     <result column="number" jdbcType="VARCHAR" property="number" />
     <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="type" jdbcType="INTEGER" property="type" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lgt.clubmanagement.entity.Task">
     <result column="introduction" jdbcType="LONGVARCHAR" property="introduction" />
@@ -71,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, sId, publisher, number, date
+    id, name, sId, publisher, number, date, status, type
   </sql>
   <sql id="Blob_Column_List">
     introduction
@@ -127,10 +129,12 @@
   <insert id="insert" parameterType="com.lgt.clubmanagement.entity.Task">
     insert into task (id, name, sId, 
       publisher, number, date, 
-      introduction)
+      status, type, introduction
+      )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER}, 
       #{publisher,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, 
-      #{introduction,jdbcType=LONGVARCHAR})
+      #{status,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{introduction,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.lgt.clubmanagement.entity.Task">
     insert into task
@@ -152,6 +156,12 @@
       </if>
       <if test="date != null">
         date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="type != null">
+        type,
       </if>
       <if test="introduction != null">
         introduction,
@@ -175,6 +185,12 @@
       </if>
       <if test="date != null">
         #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
       </if>
       <if test="introduction != null">
         #{introduction,jdbcType=LONGVARCHAR},
@@ -208,6 +224,12 @@
       <if test="record.date != null">
         date = #{record.date,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
       <if test="record.introduction != null">
         introduction = #{record.introduction,jdbcType=LONGVARCHAR},
       </if>
@@ -224,6 +246,8 @@
       publisher = #{record.publisher,jdbcType=VARCHAR},
       number = #{record.number,jdbcType=VARCHAR},
       date = #{record.date,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
       introduction = #{record.introduction,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -236,7 +260,9 @@
       sId = #{record.sid,jdbcType=INTEGER},
       publisher = #{record.publisher,jdbcType=VARCHAR},
       number = #{record.number,jdbcType=VARCHAR},
-      date = #{record.date,jdbcType=TIMESTAMP}
+      date = #{record.date,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -259,6 +285,12 @@
       <if test="date != null">
         date = #{date,jdbcType=TIMESTAMP},
       </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
       <if test="introduction != null">
         introduction = #{introduction,jdbcType=LONGVARCHAR},
       </if>
@@ -272,6 +304,8 @@
       publisher = #{publisher,jdbcType=VARCHAR},
       number = #{number,jdbcType=VARCHAR},
       date = #{date,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
       introduction = #{introduction,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -281,7 +315,9 @@
       sId = #{sid,jdbcType=INTEGER},
       publisher = #{publisher,jdbcType=VARCHAR},
       number = #{number,jdbcType=VARCHAR},
-      date = #{date,jdbcType=TIMESTAMP}
+      date = #{date,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

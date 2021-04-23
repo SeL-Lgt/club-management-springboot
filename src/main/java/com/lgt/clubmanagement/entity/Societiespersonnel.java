@@ -23,6 +23,8 @@ public class Societiespersonnel extends SocietiespersonnelKey {
         this.societies = societies;
     }
 
+    private Integer status;
+
     public Date getDate() {
         return date;
     }
@@ -37,5 +39,13 @@ public class Societiespersonnel extends SocietiespersonnelKey {
 
     public void setUserinfo(Userinfo userinfo) {
         this.userinfo = userinfo;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

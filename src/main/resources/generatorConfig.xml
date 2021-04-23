@@ -51,17 +51,17 @@
 
         <!-- 指定数据库表 -->
         <!--<table schema="root" tableName="TABLE"></table schema="root">-->
-        <table schema="root" tableName="userInfo"/>
-        <table schema="root" tableName="societies"/>
-        <table schema="root" tableName="societiesType"/>
-        <table schema="root" tableName="societiesPersonnel"/>
-        <table schema="root" tableName="societiesJobType"/>
-        <table schema="root" tableName="activity"/>
-        <table schema="root" tableName="activityType"/>
-        <table schema="root" tableName="activityPeople"/>
-        <table schema="root" tableName="photo"/>
+<!--        <table schema="root" tableName="userInfo"/>-->
+<!--        <table schema="root" tableName="societies"/>-->
+<!--        <table schema="root" tableName="societiesType"/>-->
+<!--        <table schema="root" tableName="societiesPersonnel"/>-->
+<!--        <table schema="root" tableName="societiesJobType"/>-->
+<!--        <table schema="root" tableName="activity"/>-->
+<!--        <table schema="root" tableName="activityType"/>-->
+<!--        <table schema="root" tableName="activityPeople"/>-->
+<!--        <table schema="root" tableName="photo"/>-->
         <table schema="root" tableName="task"/>
-        <table schema="root" tableName="funding"/>
+<!--        <table schema="root" tableName="funding"/>-->
 
     </context>
 
