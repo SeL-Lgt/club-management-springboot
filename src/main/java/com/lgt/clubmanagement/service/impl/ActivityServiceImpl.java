@@ -24,14 +24,14 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<Activity> queryActivityByAll() {
+    public List<ActivityWithBLOBs> queryActivityByAll() {
         ActivityExample example = new ActivityExample();
         ActivityExample.Criteria criteria = example.createCriteria();
-        return activityMapper.selectByExample(example);
+        return activityMapper.selectByExampleWithBLOBs(example);
     }
 
     @Override
-    public List<Activity> queryActivityByExample(Activity activity) {
+    public List<ActivityWithBLOBs> queryActivityByExample(ActivityWithBLOBs activity) {
         ActivityExample example = new ActivityExample();
         ActivityExample.Criteria criteria = example.createCriteria();
 
@@ -52,16 +52,16 @@ public class ActivityServiceImpl implements ActivityService {
             criteria.andEndtimeLessThanOrEqualTo(activity.getEndtime());
         }
 
-        return activityMapper.selectByExample(example);
+        return activityMapper.selectByExampleWithBLOBs(example);
     }
 
     @Override
-    public int deleteActivity(Activity activity) {
-        return activityMapper.deleteByPrimaryKey(activity);
+    public int deleteActivity(ActivityWithBLOBs activity) {
+        return activityMapper.deleteByPrimaryKey(activity.getId());
     }
 
     @Override
-    public int updateActivity(Activity activity) {
+    public int updateActivity(ActivityWithBLOBs activity) {
         return activityMapper.updateByPrimaryKey(activity);
     }
 
@@ -71,4 +71,9 @@ public class ActivityServiceImpl implements ActivityService {
         ActivitytypeExample.Criteria criteria = example.createCriteria();
         return activitytypeMapper.selectByExample(example);
     }
+
+//    @Override
+//    public int insertActivityPeople() {
+//        return 0;
+//    }
 }

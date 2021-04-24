@@ -174,62 +174,52 @@ public class ActivitypeopleExample {
             return (Criteria) this;
         }
 
-        public Criteria andNumberEqualTo(String value) {
+        public Criteria andNumberEqualTo(Integer value) {
             addCriterion("number =", value, "number");
             return (Criteria) this;
         }
 
-        public Criteria andNumberNotEqualTo(String value) {
+        public Criteria andNumberNotEqualTo(Integer value) {
             addCriterion("number <>", value, "number");
             return (Criteria) this;
         }
 
-        public Criteria andNumberGreaterThan(String value) {
+        public Criteria andNumberGreaterThan(Integer value) {
             addCriterion("number >", value, "number");
             return (Criteria) this;
         }
 
-        public Criteria andNumberGreaterThanOrEqualTo(String value) {
+        public Criteria andNumberGreaterThanOrEqualTo(Integer value) {
             addCriterion("number >=", value, "number");
             return (Criteria) this;
         }
 
-        public Criteria andNumberLessThan(String value) {
+        public Criteria andNumberLessThan(Integer value) {
             addCriterion("number <", value, "number");
             return (Criteria) this;
         }
 
-        public Criteria andNumberLessThanOrEqualTo(String value) {
+        public Criteria andNumberLessThanOrEqualTo(Integer value) {
             addCriterion("number <=", value, "number");
             return (Criteria) this;
         }
 
-        public Criteria andNumberLike(String value) {
-            addCriterion("number like", value, "number");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberNotLike(String value) {
-            addCriterion("number not like", value, "number");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberIn(List<String> values) {
+        public Criteria andNumberIn(List<Integer> values) {
             addCriterion("number in", values, "number");
             return (Criteria) this;
         }
 
-        public Criteria andNumberNotIn(List<String> values) {
+        public Criteria andNumberNotIn(List<Integer> values) {
             addCriterion("number not in", values, "number");
             return (Criteria) this;
         }
 
-        public Criteria andNumberBetween(String value1, String value2) {
+        public Criteria andNumberBetween(Integer value1, Integer value2) {
             addCriterion("number between", value1, value2, "number");
             return (Criteria) this;
         }
 
-        public Criteria andNumberNotBetween(String value1, String value2) {
+        public Criteria andNumberNotBetween(Integer value1, Integer value2) {
             addCriterion("number not between", value1, value2, "number");
             return (Criteria) this;
         }

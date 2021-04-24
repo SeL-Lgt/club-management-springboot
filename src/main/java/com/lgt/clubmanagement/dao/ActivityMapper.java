@@ -15,7 +15,7 @@ public interface ActivityMapper {
 
     int deleteByExample(ActivityExample example);
 
-    int deleteByPrimaryKey(ActivityKey key);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(ActivityWithBLOBs record);
 
@@ -25,7 +25,7 @@ public interface ActivityMapper {
 
     List<Activity> selectByExample(ActivityExample example);
 
-    ActivityWithBLOBs selectByPrimaryKey(ActivityKey key);
+    ActivityWithBLOBs selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") ActivityWithBLOBs record, @Param("example") ActivityExample example);
 

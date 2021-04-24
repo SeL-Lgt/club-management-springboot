@@ -3,7 +3,7 @@
 <mapper namespace="com.lgt.clubmanagement.dao.ActivityMapper">
   <resultMap id="BaseResultMap" type="com.lgt.clubmanagement.entity.Activity">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <id column="sId" jdbcType="INTEGER" property="sid" />
+    <result column="sId" jdbcType="INTEGER" property="sid" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="principal" jdbcType="INTEGER" property="principal" />
     <result column="type" jdbcType="INTEGER" property="type" />
@@ -109,19 +109,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="com.lgt.clubmanagement.entity.ActivityKey" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from activity
     where id = #{id,jdbcType=INTEGER}
-      and sId = #{sid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.lgt.clubmanagement.entity.ActivityKey">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from activity
     where id = #{id,jdbcType=INTEGER}
-      and sId = #{sid,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.lgt.clubmanagement.entity.ActivityExample">
     delete from activity
@@ -283,6 +281,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.lgt.clubmanagement.entity.ActivityWithBLOBs">
     update activity
     <set>
+      <if test="sid != null">
+        sId = #{sid,jdbcType=INTEGER},
+      </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
@@ -309,11 +310,11 @@
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
-      and sId = #{sid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lgt.clubmanagement.entity.ActivityWithBLOBs">
     update activity
-    set name = #{name,jdbcType=VARCHAR},
+    set sId = #{sid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
       principal = #{principal,jdbcType=INTEGER},
       type = #{type,jdbcType=INTEGER},
       startTime = #{starttime,jdbcType=TIMESTAMP},
@@ -322,17 +323,16 @@
       location = #{location,jdbcType=LONGVARCHAR},
       introduction = #{introduction,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
-      and sId = #{sid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lgt.clubmanagement.entity.Activity">
     update activity
-    set name = #{name,jdbcType=VARCHAR},
+    set sId = #{sid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
       principal = #{principal,jdbcType=INTEGER},
       type = #{type,jdbcType=INTEGER},
       startTime = #{starttime,jdbcType=TIMESTAMP},
       endTime = #{endtime,jdbcType=TIMESTAMP},
       instructor = #{instructor,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
-      and sId = #{sid,jdbcType=INTEGER}
   </update>
 </mapper>

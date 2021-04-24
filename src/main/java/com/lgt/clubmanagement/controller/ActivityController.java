@@ -29,6 +29,7 @@ public class ActivityController {
     public JsonResult createActivity(ActivityWithBLOBs activity) {
         try {
             int count = activityService.createActivity(activity);
+
             return JsonResult.success(count, "创建成功");
         } catch (Exception e) {
             return JsonResult.error("", e.toString());
@@ -39,7 +40,7 @@ public class ActivityController {
     @GetMapping("queryActivityByAll")
     public JsonResult queryActivityByAll() {
         try {
-            List<Activity> list = activityService.queryActivityByAll();
+            List<ActivityWithBLOBs> list = activityService.queryActivityByAll();
             return JsonResult.success(list, "查询成功");
         } catch (Exception e) {
             return JsonResult.error("", e.toString());
@@ -48,9 +49,9 @@ public class ActivityController {
 
     @ApiOperation(value = "查询相应社团活动")
     @PostMapping("queryActivityByExample")
-    public JsonResult queryActivityByExample(Activity activity) {
+    public JsonResult queryActivityByExample(ActivityWithBLOBs activity) {
         try {
-            List<Activity> list = activityService.queryActivityByExample(activity);
+            List<ActivityWithBLOBs> list = activityService.queryActivityByExample(activity);
             return JsonResult.success(list, "查询成功");
         } catch (Exception e) {
             return JsonResult.error("", e.toString());
@@ -59,7 +60,7 @@ public class ActivityController {
 
     @ApiOperation(value = "删除活动")
     @PostMapping("deleteActivity")
-    public JsonResult deleteActivity(Activity activity) {
+    public JsonResult deleteActivity(ActivityWithBLOBs activity) {
         try {
             int count = activityService.deleteActivity(activity);
             return JsonResult.success(count, "删除成功");
@@ -70,7 +71,7 @@ public class ActivityController {
 
     @ApiOperation(value = "更新活动信息")
     @PostMapping("updateActivity")
-    public JsonResult updateActivity(Activity activity) {
+    public JsonResult updateActivity(ActivityWithBLOBs activity) {
         try {
             int count = activityService.updateActivity(activity);
             return JsonResult.success(count, "更新成功");

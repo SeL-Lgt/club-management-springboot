@@ -21,7 +21,7 @@ public interface ActivityService {
      *
      * @return
      */
-    List<Activity> queryActivityByAll();
+    List<ActivityWithBLOBs> queryActivityByAll();
 
     /**
      * 按条件查询信息
@@ -29,7 +29,7 @@ public interface ActivityService {
      * @param activity
      * @return
      */
-    List<Activity> queryActivityByExample(Activity activity);
+    List<ActivityWithBLOBs> queryActivityByExample(ActivityWithBLOBs activity);
 
     /**
      * 删除社团信息
@@ -37,7 +37,7 @@ public interface ActivityService {
      * @param activity
      * @return
      */
-    int deleteActivity(Activity activity);
+    int deleteActivity(ActivityWithBLOBs activity);
 
     /**
      * 更新社团信息
@@ -45,11 +45,13 @@ public interface ActivityService {
      * @param activity
      * @return
      */
-    int updateActivity(Activity activity);
+    int updateActivity(ActivityWithBLOBs activity);
 
     /**
      * 查询所有活动类型
      * @return
      */
     List<Activitytype> queryActivityTypeByAll();
+
+//    int insertActivityPeople(Activitypeople);
 }

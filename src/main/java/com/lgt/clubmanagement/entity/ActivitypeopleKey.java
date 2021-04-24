@@ -3,7 +3,7 @@ package com.lgt.clubmanagement.entity;
 public class ActivitypeopleKey {
     private Integer id;
 
-    private String number;
+    private Integer number;
 
     public Integer getId() {
         return id;
@@ -13,11 +13,11 @@ public class ActivitypeopleKey {
         this.id = id;
     }
 
-    public String getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
-        this.number = number == null ? null : number.trim();
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 }

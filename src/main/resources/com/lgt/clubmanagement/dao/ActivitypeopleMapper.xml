@@ -3,7 +3,7 @@
 <mapper namespace="com.lgt.clubmanagement.dao.ActivitypeopleMapper">
   <resultMap id="BaseResultMap" type="com.lgt.clubmanagement.entity.ActivitypeopleKey">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <id column="number" jdbcType="VARCHAR" property="number" />
+    <id column="number" jdbcType="INTEGER" property="number" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -83,7 +83,7 @@
   <delete id="deleteByPrimaryKey" parameterType="com.lgt.clubmanagement.entity.ActivitypeopleKey">
     delete from activitypeople
     where id = #{id,jdbcType=INTEGER}
-      and number = #{number,jdbcType=VARCHAR}
+      and number = #{number,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.lgt.clubmanagement.entity.ActivitypeopleExample">
     delete from activitypeople
@@ -93,7 +93,7 @@
   </delete>
   <insert id="insert" parameterType="com.lgt.clubmanagement.entity.ActivitypeopleKey">
     insert into activitypeople (id, number)
-    values (#{id,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR})
+    values (#{id,jdbcType=INTEGER}, #{number,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.lgt.clubmanagement.entity.ActivitypeopleKey">
     insert into activitypeople
@@ -110,7 +110,7 @@
         #{id,jdbcType=INTEGER},
       </if>
       <if test="number != null">
-        #{number,jdbcType=VARCHAR},
+        #{number,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -127,7 +127,7 @@
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.number != null">
-        number = #{record.number,jdbcType=VARCHAR},
+        number = #{record.number,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -137,7 +137,7 @@
   <update id="updateByExample" parameterType="map">
     update activitypeople
     set id = #{record.id,jdbcType=INTEGER},
-      number = #{record.number,jdbcType=VARCHAR}
+      number = #{record.number,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
