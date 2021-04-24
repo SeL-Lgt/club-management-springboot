@@ -68,6 +68,7 @@ public class SocietiesController {
             societiesPersonnel.setSid(sId);
             societiesPersonnel.setDate(data);
             societiesPersonnel.setJob(3);
+            societiesPersonnel.setStatus(1);
             societiesPersonnelService.addSocietiesPersonnel(societiesPersonnel);
 
             return JsonResult.success(value, "创建成功");

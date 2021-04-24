@@ -59,4 +59,13 @@ public class SocietiesPersonnelServiceImpl implements SocietiesPersonnelService 
         criteria.andSidEqualTo(societiespersonnel.getSid());
         return societiespersonnelMapper.deleteByExample(example);
     }
+
+    @Override
+    public List<Societiespersonnel> querySocietiesPersonnelByJob(int sid, int job) {
+        SocietiespersonnelExample example=new SocietiespersonnelExample();
+        SocietiespersonnelExample.Criteria criteria=example.createCriteria();
+        criteria.andSidEqualTo(sid);
+        criteria.andJobEqualTo(job);
+        return societiespersonnelMapper.selectByExample(example);
+    }
 }

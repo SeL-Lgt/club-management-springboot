@@ -305,62 +305,52 @@ public class ActivityExample {
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalEqualTo(String value) {
+        public Criteria andPrincipalEqualTo(Integer value) {
             addCriterion("principal =", value, "principal");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalNotEqualTo(String value) {
+        public Criteria andPrincipalNotEqualTo(Integer value) {
             addCriterion("principal <>", value, "principal");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalGreaterThan(String value) {
+        public Criteria andPrincipalGreaterThan(Integer value) {
             addCriterion("principal >", value, "principal");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalGreaterThanOrEqualTo(String value) {
+        public Criteria andPrincipalGreaterThanOrEqualTo(Integer value) {
             addCriterion("principal >=", value, "principal");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalLessThan(String value) {
+        public Criteria andPrincipalLessThan(Integer value) {
             addCriterion("principal <", value, "principal");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalLessThanOrEqualTo(String value) {
+        public Criteria andPrincipalLessThanOrEqualTo(Integer value) {
             addCriterion("principal <=", value, "principal");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalLike(String value) {
-            addCriterion("principal like", value, "principal");
-            return (Criteria) this;
-        }
-
-        public Criteria andPrincipalNotLike(String value) {
-            addCriterion("principal not like", value, "principal");
-            return (Criteria) this;
-        }
-
-        public Criteria andPrincipalIn(List<String> values) {
+        public Criteria andPrincipalIn(List<Integer> values) {
             addCriterion("principal in", values, "principal");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalNotIn(List<String> values) {
+        public Criteria andPrincipalNotIn(List<Integer> values) {
             addCriterion("principal not in", values, "principal");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalBetween(String value1, String value2) {
+        public Criteria andPrincipalBetween(Integer value1, Integer value2) {
             addCriterion("principal between", value1, value2, "principal");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalNotBetween(String value1, String value2) {
+        public Criteria andPrincipalNotBetween(Integer value1, Integer value2) {
             addCriterion("principal not between", value1, value2, "principal");
             return (Criteria) this;
         }

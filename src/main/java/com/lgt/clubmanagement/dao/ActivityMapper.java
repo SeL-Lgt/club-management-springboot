@@ -3,6 +3,7 @@ package com.lgt.clubmanagement.dao;
 import com.lgt.clubmanagement.entity.Activity;
 import com.lgt.clubmanagement.entity.ActivityExample;
 import com.lgt.clubmanagement.entity.ActivityKey;
+import com.lgt.clubmanagement.entity.ActivityWithBLOBs;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -16,25 +17,25 @@ public interface ActivityMapper {
 
     int deleteByPrimaryKey(ActivityKey key);
 
-    int insert(Activity record);
+    int insert(ActivityWithBLOBs record);
 
-    int insertSelective(Activity record);
+    int insertSelective(ActivityWithBLOBs record);
 
-    List<Activity> selectByExampleWithBLOBs(ActivityExample example);
+    List<ActivityWithBLOBs> selectByExampleWithBLOBs(ActivityExample example);
 
     List<Activity> selectByExample(ActivityExample example);
 
-    Activity selectByPrimaryKey(ActivityKey key);
+    ActivityWithBLOBs selectByPrimaryKey(ActivityKey key);
 
-    int updateByExampleSelective(@Param("record") Activity record, @Param("example") ActivityExample example);
+    int updateByExampleSelective(@Param("record") ActivityWithBLOBs record, @Param("example") ActivityExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") Activity record, @Param("example") ActivityExample example);
+    int updateByExampleWithBLOBs(@Param("record") ActivityWithBLOBs record, @Param("example") ActivityExample example);
 
     int updateByExample(@Param("record") Activity record, @Param("example") ActivityExample example);
 
-    int updateByPrimaryKeySelective(Activity record);
+    int updateByPrimaryKeySelective(ActivityWithBLOBs record);
 
-    int updateByPrimaryKeyWithBLOBs(Activity record);
+    int updateByPrimaryKeyWithBLOBs(ActivityWithBLOBs record);
 
     int updateByPrimaryKey(Activity record);
 }

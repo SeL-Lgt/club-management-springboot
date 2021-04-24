@@ -46,12 +46,22 @@ public class SocietiesPersonnelController {
         // 添加至事务
         // 是否允许加入社团
         Task task = new Task();
+        task.setSid(societiespersonnel.getSid());
         task.setName(name + "申请加入社团");
+        task.setIntroduction(name + "申请加入社团");
+        task.setDate(data);
+        // 事务状态：0-未完成
+        task.setStatus(0);
         // 事务类型：1、申请加入社团。2、申请创建社团。3、经费申请。4、社团任务
         task.setType(1);
         // 发布人
-//        task.setPublisher(societiespersonnel.getUid());
+        task.setPublisher(societiespersonnel.getUid());
         try {
+            int founder = societiesPersonnelService.querySocietiesPersonnelByJob(societiespersonnel.getSid(), 3).get(0).getUid();
+            task.setNumber(founder);
+
+            taskService.createTask(task);
+
             societiesPersonnelService.addSocietiesPersonnel(societiespersonnel);
             return JsonResult.success("", "添加成功");
         } catch (Exception e) {

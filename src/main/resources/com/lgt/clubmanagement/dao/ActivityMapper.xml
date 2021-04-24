@@ -5,14 +5,15 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <id column="sId" jdbcType="INTEGER" property="sid" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="principal" jdbcType="VARCHAR" property="principal" />
+    <result column="principal" jdbcType="INTEGER" property="principal" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="startTime" jdbcType="TIMESTAMP" property="starttime" />
     <result column="endTime" jdbcType="TIMESTAMP" property="endtime" />
     <result column="instructor" jdbcType="VARCHAR" property="instructor" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lgt.clubmanagement.entity.Activity">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lgt.clubmanagement.entity.ActivityWithBLOBs">
     <result column="location" jdbcType="LONGVARCHAR" property="location" />
+    <result column="introduction" jdbcType="LONGVARCHAR" property="introduction" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -76,7 +77,7 @@
     id, sId, name, principal, type, startTime, endTime, instructor
   </sql>
   <sql id="Blob_Column_List">
-    location
+    location, introduction
   </sql>
   <select id="selectByExampleWithBLOBs" parameterType="com.lgt.clubmanagement.entity.ActivityExample" resultMap="ResultMapWithBLOBs">
     select
@@ -128,17 +129,17 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.lgt.clubmanagement.entity.Activity">
+  <insert id="insert" parameterType="com.lgt.clubmanagement.entity.ActivityWithBLOBs">
     insert into activity (id, sId, name, 
       principal, type, startTime, 
-      endTime, instructor, location
-      )
+      endTime, instructor, location, 
+      introduction)
     values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{principal,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP}, 
-      #{endtime,jdbcType=TIMESTAMP}, #{instructor,jdbcType=VARCHAR}, #{location,jdbcType=LONGVARCHAR}
-      )
+      #{principal,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP}, 
+      #{endtime,jdbcType=TIMESTAMP}, #{instructor,jdbcType=VARCHAR}, #{location,jdbcType=LONGVARCHAR}, 
+      #{introduction,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.lgt.clubmanagement.entity.Activity">
+  <insert id="insertSelective" parameterType="com.lgt.clubmanagement.entity.ActivityWithBLOBs">
     insert into activity
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -168,6 +169,9 @@
       <if test="location != null">
         location,
       </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -180,7 +184,7 @@
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="principal != null">
-        #{principal,jdbcType=VARCHAR},
+        #{principal,jdbcType=INTEGER},
       </if>
       <if test="type != null">
         #{type,jdbcType=INTEGER},
@@ -196,6 +200,9 @@
       </if>
       <if test="location != null">
         #{location,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -218,7 +225,7 @@
         name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.principal != null">
-        principal = #{record.principal,jdbcType=VARCHAR},
+        principal = #{record.principal,jdbcType=INTEGER},
       </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=INTEGER},
@@ -235,6 +242,9 @@
       <if test="record.location != null">
         location = #{record.location,jdbcType=LONGVARCHAR},
       </if>
+      <if test="record.introduction != null">
+        introduction = #{record.introduction,jdbcType=LONGVARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -245,12 +255,13 @@
     set id = #{record.id,jdbcType=INTEGER},
       sId = #{record.sid,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
-      principal = #{record.principal,jdbcType=VARCHAR},
+      principal = #{record.principal,jdbcType=INTEGER},
       type = #{record.type,jdbcType=INTEGER},
       startTime = #{record.starttime,jdbcType=TIMESTAMP},
       endTime = #{record.endtime,jdbcType=TIMESTAMP},
       instructor = #{record.instructor,jdbcType=VARCHAR},
-      location = #{record.location,jdbcType=LONGVARCHAR}
+      location = #{record.location,jdbcType=LONGVARCHAR},
+      introduction = #{record.introduction,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -260,7 +271,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       sId = #{record.sid,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
-      principal = #{record.principal,jdbcType=VARCHAR},
+      principal = #{record.principal,jdbcType=INTEGER},
       type = #{record.type,jdbcType=INTEGER},
       startTime = #{record.starttime,jdbcType=TIMESTAMP},
       endTime = #{record.endtime,jdbcType=TIMESTAMP},
@@ -269,14 +280,14 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lgt.clubmanagement.entity.Activity">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lgt.clubmanagement.entity.ActivityWithBLOBs">
     update activity
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="principal != null">
-        principal = #{principal,jdbcType=VARCHAR},
+        principal = #{principal,jdbcType=INTEGER},
       </if>
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},
@@ -293,26 +304,30 @@
       <if test="location != null">
         location = #{location,jdbcType=LONGVARCHAR},
       </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=LONGVARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
       and sId = #{sid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lgt.clubmanagement.entity.Activity">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lgt.clubmanagement.entity.ActivityWithBLOBs">
     update activity
     set name = #{name,jdbcType=VARCHAR},
-      principal = #{principal,jdbcType=VARCHAR},
+      principal = #{principal,jdbcType=INTEGER},
       type = #{type,jdbcType=INTEGER},
       startTime = #{starttime,jdbcType=TIMESTAMP},
       endTime = #{endtime,jdbcType=TIMESTAMP},
       instructor = #{instructor,jdbcType=VARCHAR},
-      location = #{location,jdbcType=LONGVARCHAR}
+      location = #{location,jdbcType=LONGVARCHAR},
+      introduction = #{introduction,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
       and sId = #{sid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lgt.clubmanagement.entity.Activity">
     update activity
     set name = #{name,jdbcType=VARCHAR},
-      principal = #{principal,jdbcType=VARCHAR},
+      principal = #{principal,jdbcType=INTEGER},
       type = #{type,jdbcType=INTEGER},
       startTime = #{starttime,jdbcType=TIMESTAMP},
       endTime = #{endtime,jdbcType=TIMESTAMP},

@@ -305,62 +305,52 @@ public class TaskExample {
             return (Criteria) this;
         }
 
-        public Criteria andPublisherEqualTo(String value) {
+        public Criteria andPublisherEqualTo(Integer value) {
             addCriterion("publisher =", value, "publisher");
             return (Criteria) this;
         }
 
-        public Criteria andPublisherNotEqualTo(String value) {
+        public Criteria andPublisherNotEqualTo(Integer value) {
             addCriterion("publisher <>", value, "publisher");
             return (Criteria) this;
         }
 
-        public Criteria andPublisherGreaterThan(String value) {
+        public Criteria andPublisherGreaterThan(Integer value) {
             addCriterion("publisher >", value, "publisher");
             return (Criteria) this;
         }
 
-        public Criteria andPublisherGreaterThanOrEqualTo(String value) {
+        public Criteria andPublisherGreaterThanOrEqualTo(Integer value) {
             addCriterion("publisher >=", value, "publisher");
             return (Criteria) this;
         }
 
-        public Criteria andPublisherLessThan(String value) {
+        public Criteria andPublisherLessThan(Integer value) {
             addCriterion("publisher <", value, "publisher");
             return (Criteria) this;
         }
 
-        public Criteria andPublisherLessThanOrEqualTo(String value) {
+        public Criteria andPublisherLessThanOrEqualTo(Integer value) {
             addCriterion("publisher <=", value, "publisher");
             return (Criteria) this;
         }
 
-        public Criteria andPublisherLike(String value) {
-            addCriterion("publisher like", value, "publisher");
-            return (Criteria) this;
-        }
-
-        public Criteria andPublisherNotLike(String value) {
-            addCriterion("publisher not like", value, "publisher");
-            return (Criteria) this;
-        }
-
-        public Criteria andPublisherIn(List<String> values) {
+        public Criteria andPublisherIn(List<Integer> values) {
             addCriterion("publisher in", values, "publisher");
             return (Criteria) this;
         }
 
-        public Criteria andPublisherNotIn(List<String> values) {
+        public Criteria andPublisherNotIn(List<Integer> values) {
             addCriterion("publisher not in", values, "publisher");
             return (Criteria) this;
         }
 
-        public Criteria andPublisherBetween(String value1, String value2) {
+        public Criteria andPublisherBetween(Integer value1, Integer value2) {
             addCriterion("publisher between", value1, value2, "publisher");
             return (Criteria) this;
         }
 
-        public Criteria andPublisherNotBetween(String value1, String value2) {
+        public Criteria andPublisherNotBetween(Integer value1, Integer value2) {
             addCriterion("publisher not between", value1, value2, "publisher");
             return (Criteria) this;
         }
@@ -375,62 +365,52 @@ public class TaskExample {
             return (Criteria) this;
         }
 
-        public Criteria andNumberEqualTo(String value) {
+        public Criteria andNumberEqualTo(Integer value) {
             addCriterion("number =", value, "number");
             return (Criteria) this;
         }
 
-        public Criteria andNumberNotEqualTo(String value) {
+        public Criteria andNumberNotEqualTo(Integer value) {
             addCriterion("number <>", value, "number");
             return (Criteria) this;
         }
 
-        public Criteria andNumberGreaterThan(String value) {
+        public Criteria andNumberGreaterThan(Integer value) {
             addCriterion("number >", value, "number");
             return (Criteria) this;
         }
 
-        public Criteria andNumberGreaterThanOrEqualTo(String value) {
+        public Criteria andNumberGreaterThanOrEqualTo(Integer value) {
             addCriterion("number >=", value, "number");
             return (Criteria) this;
         }
 
-        public Criteria andNumberLessThan(String value) {
+        public Criteria andNumberLessThan(Integer value) {
             addCriterion("number <", value, "number");
             return (Criteria) this;
         }
 
-        public Criteria andNumberLessThanOrEqualTo(String value) {
+        public Criteria andNumberLessThanOrEqualTo(Integer value) {
             addCriterion("number <=", value, "number");
             return (Criteria) this;
         }
 
-        public Criteria andNumberLike(String value) {
-            addCriterion("number like", value, "number");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberNotLike(String value) {
-            addCriterion("number not like", value, "number");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberIn(List<String> values) {
+        public Criteria andNumberIn(List<Integer> values) {
             addCriterion("number in", values, "number");
             return (Criteria) this;
         }
 
-        public Criteria andNumberNotIn(List<String> values) {
+        public Criteria andNumberNotIn(List<Integer> values) {
             addCriterion("number not in", values, "number");
             return (Criteria) this;
         }
 
-        public Criteria andNumberBetween(String value1, String value2) {
+        public Criteria andNumberBetween(Integer value1, Integer value2) {
             addCriterion("number between", value1, value2, "number");
             return (Criteria) this;
         }
 
-        public Criteria andNumberNotBetween(String value1, String value2) {
+        public Criteria andNumberNotBetween(Integer value1, Integer value2) {
             addCriterion("number not between", value1, value2, "number");
             return (Criteria) this;
         }

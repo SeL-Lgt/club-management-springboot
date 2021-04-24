@@ -5,7 +5,7 @@ import java.util.Date;
 public class Activity extends ActivityKey {
     private String name;
 
-    private String principal;
+    private Integer principal;
 
     private Integer type;
 
@@ -15,8 +15,6 @@ public class Activity extends ActivityKey {
 
     private String instructor;
 
-    private String location;
-
     public String getName() {
         return name;
     }
@@ -25,12 +23,12 @@ public class Activity extends ActivityKey {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getPrincipal() {
+    public Integer getPrincipal() {
         return principal;
     }
 
-    public void setPrincipal(String principal) {
-        this.principal = principal == null ? null : principal.trim();
+    public void setPrincipal(Integer principal) {
+        this.principal = principal;
     }
 
     public Integer getType() {
@@ -63,13 +61,5 @@ public class Activity extends ActivityKey {
 
     public void setInstructor(String instructor) {
         this.instructor = instructor == null ? null : instructor.trim();
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location == null ? null : location.trim();
     }
 }

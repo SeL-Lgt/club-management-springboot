@@ -43,15 +43,16 @@ create table societiesJobType
 
 create table activity
 (
-    id         int         not null auto_increment,
-    sId        int         not null,
-    name       varchar(50) not null,
-    principal  varchar(50) not null,
-    type       int         not null,
-    location   text        not null,
-    startTime  datetime    not null,
-    endTime    datetime    not null,
-    instructor varchar(20),
+    id           int         not null auto_increment,
+    sId          int         not null,
+    name         varchar(50) not null,
+    principal    varchar(50) not null,
+    type         int         not null,
+    location     text        not null,
+    startTime    datetime    not null,
+    endTime      datetime    not null,
+    instructor   varchar(20),
+    introduction text,
     primary key (`id`, `sId`)
 ) char set utf8mb4
   character set utf8mb4;

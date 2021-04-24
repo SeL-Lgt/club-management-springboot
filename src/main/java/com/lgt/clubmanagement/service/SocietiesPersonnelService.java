@@ -40,4 +40,12 @@ public interface SocietiesPersonnelService {
      * @return
      */
     int deleteSocietiesPersonnel(Societiespersonnel societiespersonnel);
+
+    /**
+     * 查询社团职位人数
+     * @param sid
+     * @param job
+     * @return
+     */
+    List<Societiespersonnel> querySocietiesPersonnelByJob(int sid, int job);
 }

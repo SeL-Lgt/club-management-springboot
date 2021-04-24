@@ -9,9 +9,9 @@ public class Task {
 
     private Integer sid;
 
-    private String publisher;
+    private Integer publisher;
 
-    private String number;
+    private Integer number;
 
     private Date date;
 
@@ -45,20 +45,20 @@ public class Task {
         this.sid = sid;
     }
 
-    public String getPublisher() {
+    public Integer getPublisher() {
         return publisher;
     }
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher == null ? null : publisher.trim();
+    public void setPublisher(Integer publisher) {
+        this.publisher = publisher;
     }
 
-    public String getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
-        this.number = number == null ? null : number.trim();
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     public Date getDate() {
