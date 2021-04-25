@@ -1,5 +1,6 @@
 package com.lgt.clubmanagement.dao;
 
+import com.lgt.clubmanagement.entity.Activitypeople;
 import com.lgt.clubmanagement.entity.ActivitypeopleExample;
 import com.lgt.clubmanagement.entity.ActivitypeopleKey;
 import java.util.List;
@@ -15,13 +16,19 @@ public interface ActivitypeopleMapper {
 
     int deleteByPrimaryKey(ActivitypeopleKey key);
 
-    int insert(ActivitypeopleKey record);
+    int insert(Activitypeople record);
 
-    int insertSelective(ActivitypeopleKey record);
+    int insertSelective(Activitypeople record);
 
-    List<ActivitypeopleKey> selectByExample(ActivitypeopleExample example);
+    List<Activitypeople> selectByExample(ActivitypeopleExample example);
 
-    int updateByExampleSelective(@Param("record") ActivitypeopleKey record, @Param("example") ActivitypeopleExample example);
+    Activitypeople selectByPrimaryKey(ActivitypeopleKey key);
 
-    int updateByExample(@Param("record") ActivitypeopleKey record, @Param("example") ActivitypeopleExample example);
+    int updateByExampleSelective(@Param("record") Activitypeople record, @Param("example") ActivitypeopleExample example);
+
+    int updateByExample(@Param("record") Activitypeople record, @Param("example") ActivitypeopleExample example);
+
+    int updateByPrimaryKeySelective(Activitypeople record);
+
+    int updateByPrimaryKey(Activitypeople record);
 }

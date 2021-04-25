@@ -5,6 +5,26 @@ public class ActivityWithBLOBs extends Activity {
 
     private String introduction;
 
+    private Societies societies;
+
+    private Userinfo userinfo;
+
+    public Userinfo getUserinfo() {
+        return userinfo;
+    }
+
+    public void setUserinfo(Userinfo userinfo) {
+        this.userinfo = userinfo;
+    }
+
+    public Societies getSocieties() {
+        return societies;
+    }
+
+    public void setSocieties(Societies societies) {
+        this.societies = societies;
+    }
+
     public String getLocation() {
         return location;
     }

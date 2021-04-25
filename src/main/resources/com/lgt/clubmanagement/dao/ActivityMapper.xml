@@ -127,7 +127,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.lgt.clubmanagement.entity.ActivityWithBLOBs">
+  <insert id="insert" parameterType="com.lgt.clubmanagement.entity.ActivityWithBLOBs" useGeneratedKeys="true" keyProperty="id"  keyColumn="id">
     insert into activity (id, sId, name, 
       principal, type, startTime, 
       endTime, instructor, location, 
