@@ -87,4 +87,13 @@ public interface ActivityService {
      * @return
      */
     int deleteActivityPeople(Integer id, Integer uid);
+
+    /**
+     * 删除所有活动人员
+     *
+     * @param id
+     * @return
+     */
+    int deleteActivityPeople(Integer id);
+
 }

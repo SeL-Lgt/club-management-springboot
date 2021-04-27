@@ -58,6 +58,7 @@ public class SocietiesPersonnelController {
         task.setPublisher(societiespersonnel.getUid());
         try {
             int founder = societiesPersonnelService.querySocietiesPersonnelByJob(societiespersonnel.getSid(), 3).get(0).getUid();
+            System.out.println(founder);
             task.setNumber(founder);
 
             taskService.createTask(task);

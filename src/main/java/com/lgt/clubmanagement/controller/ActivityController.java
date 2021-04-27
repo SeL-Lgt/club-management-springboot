@@ -3,6 +3,7 @@ package com.lgt.clubmanagement.controller;
 
 import com.lgt.clubmanagement.entity.*;
 import com.lgt.clubmanagement.service.ActivityService;
+import com.lgt.clubmanagement.service.SocietiesPersonnelService;
 import com.lgt.clubmanagement.service.SocietiesService;
 import com.lgt.clubmanagement.service.UserService;
 import com.lgt.clubmanagement.utils.JsonResult;
@@ -46,11 +47,11 @@ public class ActivityController {
         }
     }
 
-    @ApiOperation(value = "查询所有社团活动")
+    @ApiOperation(value = "查询所有社团活动(模糊查询)")
     @GetMapping("queryActivityByAll")
-    public JsonResult queryActivityByAll() {
+    public JsonResult queryActivityByAll(ActivityWithBLOBs activity) {
         try {
-            List<ActivityWithBLOBs> list = activityService.queryActivityByAll();
+            List<ActivityWithBLOBs> list = activityService.queryActivityByExample(activity);
 
             for (ActivityWithBLOBs a : list) {
                 Societies societies = new Societies();
@@ -68,16 +69,17 @@ public class ActivityController {
         }
     }
 
-    @ApiOperation(value = "查询相应社团活动")
-    @PostMapping("queryActivityByExample")
-    public JsonResult queryActivityByExample(ActivityWithBLOBs activity) {
-        try {
-            List<ActivityWithBLOBs> list = activityService.queryActivityByExample(activity);
-            return JsonResult.success(list, "查询成功");
-        } catch (Exception e) {
-            return JsonResult.error("", e.toString());
-        }
-    }
+//    @ApiOperation(value = "查询相应社团活动")
+//    @PostMapping("queryActivityByExample")
+//    public JsonResult queryActivityByExample(ActivityWithBLOBs activity) {
+//        try {
+//            List<ActivityWithBLOBs> list = activityService.queryActivityByExample(activity);
+//
+//            return JsonResult.success(list, "查询成功");
+//        } catch (Exception e) {
+//            return JsonResult.error("", e.toString());
+//        }
+//    }
 
     @ApiOperation(value = "查询我的活动")
     @PostMapping("queryActivityByMy")
@@ -106,6 +108,8 @@ public class ActivityController {
     public JsonResult deleteActivity(ActivityWithBLOBs activity) {
         try {
             int count = activityService.deleteActivity(activity);
+            // 删除所有活动成员
+            activityService.deleteActivityPeople(activity.getId());
             return JsonResult.success(count, "删除成功");
         } catch (Exception e) {
             return JsonResult.error("", "删除失败");

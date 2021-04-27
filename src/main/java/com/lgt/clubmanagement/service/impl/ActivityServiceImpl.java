@@ -5,6 +5,7 @@ import com.lgt.clubmanagement.dao.ActivitypeopleMapper;
 import com.lgt.clubmanagement.dao.ActivitytypeMapper;
 import com.lgt.clubmanagement.entity.*;
 import com.lgt.clubmanagement.service.ActivityService;
+import com.lgt.clubmanagement.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,10 +60,10 @@ public class ActivityServiceImpl implements ActivityService {
         }
 
         if (activity.getStarttime() != null && !activity.getStarttime().equals("")) {
-            criteria.andStarttimeGreaterThanOrEqualTo(activity.getStarttime());
+            criteria.andStarttimeLessThanOrEqualTo(activity.getEndtime());
         }
         if (activity.getEndtime() != null && !activity.getEndtime().equals("")) {
-            criteria.andEndtimeLessThanOrEqualTo(activity.getEndtime());
+            criteria.andEndtimeGreaterThanOrEqualTo(activity.getStarttime());
         }
 
         return activityMapper.selectByExampleWithBLOBs(example);
@@ -109,8 +110,16 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public int deleteActivityPeople(Integer id, Integer uid) {
         ActivitypeopleExample example = new ActivitypeopleExample();
-        ActivitypeopleExample.Criteria criteria=example.createCriteria();
+        ActivitypeopleExample.Criteria criteria = example.createCriteria();
         criteria.andUidEqualTo(uid);
+        criteria.andIdEqualTo(id);
+        return activitypeopleMapper.deleteByExample(example);
+    }
+
+    @Override
+    public int deleteActivityPeople(Integer id) {
+        ActivitypeopleExample example = new ActivitypeopleExample();
+        ActivitypeopleExample.Criteria criteria = example.createCriteria();
         criteria.andIdEqualTo(id);
         return activitypeopleMapper.deleteByExample(example);
     }

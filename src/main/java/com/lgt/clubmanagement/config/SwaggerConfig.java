@@ -21,18 +21,46 @@ public class SwaggerConfig implements WebMvcConfigurer {
     public Docket getUserDocket() {
         Contact contact = new Contact("lgt", "localhost:9090", "122790345@qq.com");
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("用户管理")//api标题
-                .description("用户管理相关接口描述")//api描述
-                .version("1.0.0")//版本号
-                .contact(contact)//本API负责人的联系信息
+                //api标题
+                .title("高校社团事务管理信息系统")
+                //api描述
+                .description("高校社团事务管理信息系统相关接口描述")
+                //版本号
+                .version("1.0.0")
+                //本API负责人的联系信息
+                .contact(contact)
                 .build();
-        return new Docket(DocumentationType.SWAGGER_2)//文档类型（swagger2）
-                .apiInfo(apiInfo)//设置包含在json ResourceListing响应中的api元信息
-                .select()//启动用于api选择的构建器
-                .apis(RequestHandlerSelectors.basePackage("com.lgt.clubmanagement.controller"))//扫描接口的包
-                .paths(PathSelectors.any())//路径过滤器（扫描所有路径）
+                //文档类型（swagger2）
+        return new Docket(DocumentationType.SWAGGER_2)
+                //设置包含在json ResourceListing响应中的api元信息
+                .apiInfo(apiInfo)
+                //启动用于api选择的构建器
+                .select()
+                //扫描接口的包
+                .apis(RequestHandlerSelectors.basePackage("com.lgt.clubmanagement.controller"))
+                //路径过滤器（扫描所有路径）
+                .paths(PathSelectors.any())
                 .build();
     }
+
+    /**
+     * 防止@EnableMvc把默认的静态资源路径覆盖了，手动设置的方式
+     *
+     * @param registry
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // 解决静态资源无法访问
+        registry.addResourceHandler("/**")
+                .addResourceLocations("classpath:/static/");
+        // 解决swagger无法访问
+        registry.addResourceHandler("/swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+        // 解决swagger的js文件无法访问
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
+}
 
 //    @Bean
 //    public Docket createRestApi() {
@@ -58,22 +86,3 @@ public class SwaggerConfig implements WebMvcConfigurer {
 //                .version("1.0") // 可以用来定义版本。
 //                .build(); //
 //    }
-
-    /**
-     * 防止@EnableMvc把默认的静态资源路径覆盖了，手动设置的方式
-     *
-     * @param registry
-     */
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // 解决静态资源无法访问
-        registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/static/");
-        // 解决swagger无法访问
-        registry.addResourceHandler("/swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-        // 解决swagger的js文件无法访问
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
-    }
-}
