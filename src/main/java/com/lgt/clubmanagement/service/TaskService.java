@@ -6,6 +6,13 @@ import java.util.Date;
 import java.util.List;
 
 public interface TaskService {
+
+    /**
+     * 根据id查询
+     * @param id
+     * @return
+     */
+    Task queryTaskById(Integer id);
     /**
      * 查询任务列表
      *

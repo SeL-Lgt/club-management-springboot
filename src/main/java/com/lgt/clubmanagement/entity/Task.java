@@ -1,5 +1,8 @@
 package com.lgt.clubmanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Task {
@@ -13,6 +16,8 @@ public class Task {
 
     private Integer number;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date date;
 
     private Integer status;
@@ -20,6 +25,36 @@ public class Task {
     private Integer type;
 
     private String introduction;
+
+    private Userinfo publisherInfo;
+
+    private Userinfo numberInfo;
+
+    private Societies societies;
+
+    public Societies getSocieties() {
+        return societies;
+    }
+
+    public void setSocieties(Societies societies) {
+        this.societies = societies;
+    }
+
+    public Userinfo getPublisherInfo() {
+        return publisherInfo;
+    }
+
+    public void setPublisherInfo(Userinfo publisherInfo) {
+        this.publisherInfo = publisherInfo;
+    }
+
+    public Userinfo getNumberInfo() {
+        return numberInfo;
+    }
+
+    public void setNumberInfo(Userinfo numberInfo) {
+        this.numberInfo = numberInfo;
+    }
 
     public Integer getId() {
         return id;

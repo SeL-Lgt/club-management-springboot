@@ -48,4 +48,12 @@ public interface SocietiesPersonnelService {
      * @return
      */
     List<Societiespersonnel> querySocietiesPersonnelByJob(int sid, int job);
+
+
+    /**
+     * 更新社团成员信息
+     * @param societiespersonnel
+     * @return
+     */
+    int updateSocietiesPersonnel(Societiespersonnel societiespersonnel);
 }

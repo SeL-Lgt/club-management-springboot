@@ -58,7 +58,6 @@ public class SocietiesPersonnelController {
         task.setPublisher(societiespersonnel.getUid());
         try {
             int founder = societiesPersonnelService.querySocietiesPersonnelByJob(societiespersonnel.getSid(), 3).get(0).getUid();
-            System.out.println(founder);
             task.setNumber(founder);
 
             taskService.createTask(task);
@@ -95,11 +94,11 @@ public class SocietiesPersonnelController {
             userinfo.setName(name);
             Date start = null;
             Date end = null;
-            if (!startTime.equals("") && startTime != null) {
+            if (startTime !=null && !startTime.equals("") ){
                 start = DateUtil.parseDate(startTime, DateUtil.DEFAULT_FORMAT);
                 System.out.println(startTime);
             }
-            if (!endTime.equals("") && endTime != null) {
+            if (endTime != null && !endTime.equals("")) {
                 end = DateUtil.parseDate(endTime, DateUtil.DEFAULT_FORMAT);
                 System.out.println(endTime);
             }
@@ -124,6 +123,10 @@ public class SocietiesPersonnelController {
     public JsonResult querySocietiesPersonnelAll(Integer sId) {
         try {
             List<Societiespersonnel> list = societiesPersonnelService.querySocietiesPersonnelAll(sId);
+            for (Societiespersonnel s:list){
+                Userinfo userinfo = userService.queryUserById(s.getUid());
+                s.setUserinfo(userinfo);
+            }
             return JsonResult.success(list, "查询成功");
         } catch (Exception e) {
             return JsonResult.error(e, "查询失败");

@@ -60,9 +60,9 @@ public class UserController {
             Userinfo userDB = userService.queryUserByNumber(number);
 
             //查询所属社团
-            Integer uId = userDB.getId();
             Societiespersonnel societiesPersonnel = new Societiespersonnel();
-            societiesPersonnel.setUid(uId);
+            societiesPersonnel.setUid(userDB.getId());
+            societiesPersonnel.setStatus(1);
             List<Societiespersonnel> list = societiesPersonnelService.querySocietiesPersonnelByExample(societiesPersonnel,null,null);
             for (int i = 0; i < list.size(); i++) {
                 Societies temp = new Societies();

@@ -36,6 +36,10 @@ public class SocietiesPersonnelServiceImpl implements SocietiesPersonnelService 
             criteria.andJobEqualTo(societiespersonnel.getJob());
         }
 
+        if (societiespersonnel.getStatus() != null && !societiespersonnel.getStatus().equals("")) {
+            criteria.andStatusEqualTo(societiespersonnel.getStatus());
+        }
+
         if (startTime != null && endTime != null) {
             criteria.andDateBetween(startTime, endTime);
         }
@@ -47,6 +51,7 @@ public class SocietiesPersonnelServiceImpl implements SocietiesPersonnelService 
         SocietiespersonnelExample example = new SocietiespersonnelExample();
         SocietiespersonnelExample.Criteria criteria = example.createCriteria();
         criteria.andSidEqualTo(sId);
+        criteria.andStatusEqualTo(1);
         example.setOrderByClause("job DESC");
         return societiespersonnelMapper.selectByExample(example);
     }
@@ -62,10 +67,15 @@ public class SocietiesPersonnelServiceImpl implements SocietiesPersonnelService 
 
     @Override
     public List<Societiespersonnel> querySocietiesPersonnelByJob(int sid, int job) {
-        SocietiespersonnelExample example=new SocietiespersonnelExample();
-        SocietiespersonnelExample.Criteria criteria=example.createCriteria();
+        SocietiespersonnelExample example = new SocietiespersonnelExample();
+        SocietiespersonnelExample.Criteria criteria = example.createCriteria();
         criteria.andSidEqualTo(sid);
         criteria.andJobEqualTo(job);
         return societiespersonnelMapper.selectByExample(example);
+    }
+
+    @Override
+    public int updateSocietiesPersonnel(Societiespersonnel societiespersonnel) {
+        return societiespersonnelMapper.updateByPrimaryKey(societiespersonnel);
     }
 }

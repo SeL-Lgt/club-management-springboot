@@ -1,12 +1,11 @@
 package com.lgt.clubmanagement.controller;
 
 import com.github.pagehelper.PageHelper;
-import com.lgt.clubmanagement.entity.Societies;
-import com.lgt.clubmanagement.entity.Societiesjobtype;
-import com.lgt.clubmanagement.entity.Societiespersonnel;
-import com.lgt.clubmanagement.entity.Societiestype;
+import com.lgt.clubmanagement.entity.*;
 import com.lgt.clubmanagement.service.SocietiesPersonnelService;
 import com.lgt.clubmanagement.service.SocietiesService;
+import com.lgt.clubmanagement.service.TaskService;
+import com.lgt.clubmanagement.service.UserService;
 import com.lgt.clubmanagement.utils.DateUtil;
 import com.lgt.clubmanagement.utils.JsonResult;
 import io.swagger.annotations.Api;
@@ -27,6 +26,10 @@ public class SocietiesController {
     private SocietiesService societiesService;
     @Autowired
     private SocietiesPersonnelService societiesPersonnelService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private TaskService taskService;
 
     @ApiOperation(value = "查询社团类型")
     @GetMapping("getSocietiesType")
@@ -56,13 +59,17 @@ public class SocietiesController {
         Date data = new Date();
         societies.setDate(DateUtil.parseDate(DateUtil.format(data, DateUtil.DEFAULT_FORMAT), DateUtil.DEFAULT_FORMAT));
         // 1为同意创建 0为不同意
-        societies.setStatus("1");
+        societies.setStatus("0");
         societies.setMoney(0.0);
+
+        Userinfo userinfo = userService.queryUserById(uId);
+
         try {
             Integer value = societiesService.addSocieties(societies);
 
-            // 录入成员信息---职位社长
             Integer sId = societiesService.querySocietiesByCondition(societies).get(0).getId();
+
+            // 录入成员信息---职位社长
             Societiespersonnel societiesPersonnel = new Societiespersonnel();
             societiesPersonnel.setUid(uId);
             societiesPersonnel.setSid(sId);
@@ -70,6 +77,22 @@ public class SocietiesController {
             societiesPersonnel.setJob(3);
             societiesPersonnel.setStatus(1);
             societiesPersonnelService.addSocietiesPersonnel(societiesPersonnel);
+
+            // 添加任务--创建社团任务
+            Task task = new Task();
+            task.setSid(sId);
+            task.setName("申请创建" + societies.getSname());
+            task.setIntroduction(userinfo.getName() + "申请创建" + societies.getSname());
+            task.setDate(data);
+            // 事务状态：0-未完成
+            task.setStatus(0);
+            // 事务类型：1、申请加入社团。2、申请创建社团。3、经费申请。4、社团任务
+            task.setType(2);
+            // 发布人
+            task.setPublisher(uId);
+            task.setNumber(3);
+            taskService.createTask(task);
+
 
             return JsonResult.success(value, "创建成功");
         } catch (Exception e) {

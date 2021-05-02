@@ -16,9 +16,21 @@ public class TaskServiceImpl implements TaskService {
     private TaskMapper taskMapper;
 
     @Override
+    public Task queryTaskById(Integer id) {
+        return taskMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public List<Task> queryTaskList(Task task, Date startTime, Date endTime) {
         TaskExample taskExample = new TaskExample();
         TaskExample.Criteria criteria = taskExample.createCriteria();
+
+        if(task.getPublisher()!= null && !task.getPublisher().equals("")){
+            criteria.andPublisherEqualTo(task.getPublisher());
+        }
+        if(task.getNumber()!= null && !task.getNumber().equals("")){
+            criteria.andNumberEqualTo(task.getNumber());
+        }
 
         if (task.getId() != null && !task.getId().equals("")) {
             criteria.andIdEqualTo(task.getId());
@@ -41,7 +53,7 @@ public class TaskServiceImpl implements TaskService {
             criteria.andNameLike("%" + task.getName() + "%");
         }
 
-        return null;
+        return taskMapper.selectByExampleWithBLOBs(taskExample);
     }
 
     @Override
