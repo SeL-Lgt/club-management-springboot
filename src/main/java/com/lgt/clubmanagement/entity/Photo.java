@@ -1,17 +1,24 @@
 package com.lgt.clubmanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Photo {
     private Integer id;
 
+    private Integer sid;
+
     private String name;
 
-    private String number;
+    private String uid;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date date;
 
-    private String introduction;
+    private Integer status;
 
     public Integer getId() {
         return id;
@@ -19,6 +26,14 @@ public class Photo {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getSid() {
+        return sid;
+    }
+
+    public void setSid(Integer sid) {
+        this.sid = sid;
     }
 
     public String getName() {
@@ -29,12 +44,12 @@ public class Photo {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getNumber() {
-        return number;
+    public String getUid() {
+        return uid;
     }
 
-    public void setNumber(String number) {
-        this.number = number == null ? null : number.trim();
+    public void setUid(String uid) {
+        this.uid = uid == null ? null : uid.trim();
     }
 
     public Date getDate() {
@@ -45,11 +60,23 @@ public class Photo {
         this.date = date;
     }
 
-    public String getIntroduction() {
-        return introduction;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction == null ? null : introduction.trim();
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Photo{" +
+                "id=" + id +
+                ", sid=" + sid +
+                ", name='" + name + '\'' +
+                ", uid='" + uid + '\'' +
+                ", date=" + date +
+                ", status=" + status +
+                '}';
     }
 }

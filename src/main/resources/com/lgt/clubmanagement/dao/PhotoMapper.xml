@@ -3,12 +3,15 @@
 <mapper namespace="com.lgt.clubmanagement.dao.PhotoMapper">
   <resultMap id="BaseResultMap" type="com.lgt.clubmanagement.entity.Photo">
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sid" jdbcType="INTEGER" property="sid" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
     <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lgt.clubmanagement.entity.Photo">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lgt.clubmanagement.entity.PhotoWithBLOBs">
     <result column="introduction" jdbcType="LONGVARCHAR" property="introduction" />
+    <result column="path" jdbcType="LONGVARCHAR" property="path" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,10 +72,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, number, date
+    id, sid, name, uid, date, status
   </sql>
   <sql id="Blob_Column_List">
-    introduction
+    introduction, path
   </sql>
   <select id="selectByExampleWithBLOBs" parameterType="com.lgt.clubmanagement.entity.PhotoExample" resultMap="ResultMapWithBLOBs">
     select
@@ -122,46 +125,66 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.lgt.clubmanagement.entity.Photo">
-    insert into photo (id, name, number, 
-      date, introduction)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, 
-      #{date,jdbcType=TIMESTAMP}, #{introduction,jdbcType=LONGVARCHAR})
+  <insert id="insert" parameterType="com.lgt.clubmanagement.entity.PhotoWithBLOBs">
+    insert into photo (id, sid, name, 
+      uid, date, status, 
+      introduction, path)
+    values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{uid,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{introduction,jdbcType=LONGVARCHAR}, #{path,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.lgt.clubmanagement.entity.Photo">
+  <insert id="insertSelective" parameterType="com.lgt.clubmanagement.entity.PhotoWithBLOBs">
     insert into photo
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
+      <if test="sid != null">
+        sid,
+      </if>
       <if test="name != null">
         name,
       </if>
-      <if test="number != null">
-        number,
+      <if test="uid != null">
+        uid,
       </if>
       <if test="date != null">
         date,
       </if>
+      <if test="status != null">
+        status,
+      </if>
       <if test="introduction != null">
         introduction,
+      </if>
+      <if test="path != null">
+        path,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="number != null">
-        #{number,jdbcType=VARCHAR},
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
       </if>
       <if test="date != null">
         #{date,jdbcType=TIMESTAMP},
       </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
       <if test="introduction != null">
         #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -177,17 +200,26 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
+      <if test="record.sid != null">
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.number != null">
-        number = #{record.number,jdbcType=VARCHAR},
+      <if test="record.uid != null">
+        uid = #{record.uid,jdbcType=VARCHAR},
       </if>
       <if test="record.date != null">
         date = #{record.date,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
       <if test="record.introduction != null">
         introduction = #{record.introduction,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.path != null">
+        path = #{record.path,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -197,10 +229,13 @@
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update photo
     set id = #{record.id,jdbcType=INTEGER},
+      sid = #{record.sid,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
-      number = #{record.number,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=VARCHAR},
       date = #{record.date,jdbcType=TIMESTAMP},
-      introduction = #{record.introduction,jdbcType=LONGVARCHAR}
+      status = #{record.status,jdbcType=INTEGER},
+      introduction = #{record.introduction,jdbcType=LONGVARCHAR},
+      path = #{record.path,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -208,44 +243,60 @@
   <update id="updateByExample" parameterType="map">
     update photo
     set id = #{record.id,jdbcType=INTEGER},
+      sid = #{record.sid,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
-      number = #{record.number,jdbcType=VARCHAR},
-      date = #{record.date,jdbcType=TIMESTAMP}
+      uid = #{record.uid,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lgt.clubmanagement.entity.Photo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lgt.clubmanagement.entity.PhotoWithBLOBs">
     update photo
     <set>
+      <if test="sid != null">
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="number != null">
-        number = #{number,jdbcType=VARCHAR},
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
       </if>
       <if test="date != null">
         date = #{date,jdbcType=TIMESTAMP},
       </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
       <if test="introduction != null">
         introduction = #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lgt.clubmanagement.entity.Photo">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lgt.clubmanagement.entity.PhotoWithBLOBs">
     update photo
-    set name = #{name,jdbcType=VARCHAR},
-      number = #{number,jdbcType=VARCHAR},
+    set sid = #{sid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR},
       date = #{date,jdbcType=TIMESTAMP},
-      introduction = #{introduction,jdbcType=LONGVARCHAR}
+      status = #{status,jdbcType=INTEGER},
+      introduction = #{introduction,jdbcType=LONGVARCHAR},
+      path = #{path,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lgt.clubmanagement.entity.Photo">
     update photo
-    set name = #{name,jdbcType=VARCHAR},
-      number = #{number,jdbcType=VARCHAR},
-      date = #{date,jdbcType=TIMESTAMP}
+    set sid = #{sid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

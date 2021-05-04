@@ -58,8 +58,8 @@
 <!--        <table schema="root" tableName="societiesJobType"/>-->
 <!--        <table schema="root" tableName="activity"/>-->
 <!--        <table schema="root" tableName="activityType"/>-->
-        <table schema="root" tableName="activityPeople"/>
-<!--        <table schema="root" tableName="photo"/>-->
+<!--        <table schema="root" tableName="activityPeople"/>-->
+        <table schema="root" tableName="photo"/>
 <!--        <table schema="root" tableName="task"/>-->
 <!--        <table schema="root" tableName="funding"/>-->
 

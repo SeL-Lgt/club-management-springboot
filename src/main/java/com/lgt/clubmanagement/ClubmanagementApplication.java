@@ -12,6 +12,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class ClubmanagementApplication {
 
     public static void main(String[] args) {
+        System.setProperty("tomcat.util.http.parser.HttpParser.requestTargetAllow","{}");
+        System.setProperty("tomcat.util.http.parser.HttpParser.requestTargetAllow","[]");
         SpringApplication.run(ClubmanagementApplication.class, args);
     }
 
