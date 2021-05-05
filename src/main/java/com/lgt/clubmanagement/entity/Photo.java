@@ -10,15 +10,25 @@ public class Photo {
 
     private Integer sid;
 
-    private String name;
+    private Integer uid;
 
-    private String uid;
+    private String name;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date date;
 
     private Integer status;
+
+    private Userinfo userinfo;
+
+    public Userinfo getUserinfo() {
+        return userinfo;
+    }
+
+    public void setUserinfo(Userinfo userinfo) {
+        this.userinfo = userinfo;
+    }
 
     public Integer getId() {
         return id;
@@ -36,20 +46,20 @@ public class Photo {
         this.sid = sid;
     }
 
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid == null ? null : uid.trim();
     }
 
     public Date getDate() {
@@ -66,17 +76,5 @@ public class Photo {
 
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    @Override
-    public String toString() {
-        return "Photo{" +
-                "id=" + id +
-                ", sid=" + sid +
-                ", name='" + name + '\'' +
-                ", uid='" + uid + '\'' +
-                ", date=" + date +
-                ", status=" + status +
-                '}';
     }
 }

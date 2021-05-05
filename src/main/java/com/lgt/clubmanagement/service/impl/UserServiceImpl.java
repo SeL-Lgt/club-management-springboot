@@ -45,7 +45,10 @@ public class UserServiceImpl implements UserService {
             criteria.andNumberEqualTo(userinfo.getNumber());
         }
         if (userinfo.getName() != null && !userinfo.getName().equals("")) {
-            criteria.andNameLike("%"+userinfo.getName()+"%");
+            criteria.andNameLike("%" + userinfo.getName() + "%");
+        }
+        if (userinfo.getType() != null && !userinfo.getType().equals("")) {
+            criteria.andTypeEqualTo(userinfo.getType());
         }
 
         return userinfoMapper.selectByExample(example);

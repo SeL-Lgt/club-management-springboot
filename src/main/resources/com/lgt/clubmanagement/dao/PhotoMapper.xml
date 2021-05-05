@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.lgt.clubmanagement.entity.Photo">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="uid" jdbcType="VARCHAR" property="uid" />
     <result column="date" jdbcType="TIMESTAMP" property="date" />
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
@@ -72,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, sid, name, uid, date, status
+    id, sid, uid, name, date, status
   </sql>
   <sql id="Blob_Column_List">
     introduction, path
@@ -126,11 +126,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.lgt.clubmanagement.entity.PhotoWithBLOBs">
-    insert into photo (id, sid, name, 
-      uid, date, status, 
+    insert into photo (id, sid, uid, 
+      name, date, status, 
       introduction, path)
-    values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{uid,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
       #{introduction,jdbcType=LONGVARCHAR}, #{path,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lgt.clubmanagement.entity.PhotoWithBLOBs">
@@ -142,11 +142,11 @@
       <if test="sid != null">
         sid,
       </if>
-      <if test="name != null">
-        name,
-      </if>
       <if test="uid != null">
         uid,
+      </if>
+      <if test="name != null">
+        name,
       </if>
       <if test="date != null">
         date,
@@ -168,11 +168,11 @@
       <if test="sid != null">
         #{sid,jdbcType=INTEGER},
       </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="uid != null">
-        #{uid,jdbcType=VARCHAR},
       </if>
       <if test="date != null">
         #{date,jdbcType=TIMESTAMP},
@@ -203,11 +203,11 @@
       <if test="record.sid != null">
         sid = #{record.sid,jdbcType=INTEGER},
       </if>
+      <if test="record.uid != null">
+        uid = #{record.uid,jdbcType=INTEGER},
+      </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.uid != null">
-        uid = #{record.uid,jdbcType=VARCHAR},
       </if>
       <if test="record.date != null">
         date = #{record.date,jdbcType=TIMESTAMP},
@@ -230,8 +230,8 @@
     update photo
     set id = #{record.id,jdbcType=INTEGER},
       sid = #{record.sid,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
-      uid = #{record.uid,jdbcType=VARCHAR},
       date = #{record.date,jdbcType=TIMESTAMP},
       status = #{record.status,jdbcType=INTEGER},
       introduction = #{record.introduction,jdbcType=LONGVARCHAR},
@@ -244,8 +244,8 @@
     update photo
     set id = #{record.id,jdbcType=INTEGER},
       sid = #{record.sid,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
-      uid = #{record.uid,jdbcType=VARCHAR},
       date = #{record.date,jdbcType=TIMESTAMP},
       status = #{record.status,jdbcType=INTEGER}
     <if test="_parameter != null">
@@ -258,11 +258,11 @@
       <if test="sid != null">
         sid = #{sid,jdbcType=INTEGER},
       </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="uid != null">
-        uid = #{uid,jdbcType=VARCHAR},
       </if>
       <if test="date != null">
         date = #{date,jdbcType=TIMESTAMP},
@@ -282,8 +282,8 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lgt.clubmanagement.entity.PhotoWithBLOBs">
     update photo
     set sid = #{sid,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
-      uid = #{uid,jdbcType=VARCHAR},
       date = #{date,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER},
       introduction = #{introduction,jdbcType=LONGVARCHAR},
@@ -293,8 +293,8 @@
   <update id="updateByPrimaryKey" parameterType="com.lgt.clubmanagement.entity.Photo">
     update photo
     set sid = #{sid,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
-      uid = #{uid,jdbcType=VARCHAR},
       date = #{date,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}

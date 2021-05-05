@@ -94,7 +94,7 @@ public class SocietiesPersonnelController {
             userinfo.setName(name);
             Date start = null;
             Date end = null;
-            if (startTime !=null && !startTime.equals("") ){
+            if (startTime != null && !startTime.equals("")) {
                 start = DateUtil.parseDate(startTime, DateUtil.DEFAULT_FORMAT);
                 System.out.println(startTime);
             }
@@ -123,7 +123,7 @@ public class SocietiesPersonnelController {
     public JsonResult querySocietiesPersonnelAll(Integer sId) {
         try {
             List<Societiespersonnel> list = societiesPersonnelService.querySocietiesPersonnelAll(sId);
-            for (Societiespersonnel s:list){
+            for (Societiespersonnel s : list) {
                 Userinfo userinfo = userService.queryUserById(s.getUid());
                 s.setUserinfo(userinfo);
             }
@@ -142,6 +142,18 @@ public class SocietiesPersonnelController {
         } catch (Exception e) {
             System.out.println(e);
             return JsonResult.error(e, "删除失败");
+        }
+    }
+
+    @ApiOperation(value = "获取社长信息")
+    @PostMapping("getPresident")
+    public JsonResult getPresident(Integer sId) {
+        try {
+            int uid = societiesPersonnelService.querySocietiesPersonnelByJob(sId, 3).get(0).getUid();
+            Userinfo userinfo = userService.queryUserById(uid);
+            return JsonResult.success(userinfo, "查询成功");
+        } catch (Exception e) {
+            return JsonResult.error(e, "查询失败");
         }
     }
 }

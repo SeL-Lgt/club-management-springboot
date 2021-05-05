@@ -40,7 +40,7 @@ public class UserController {
             Integer uId = userDB.getId();
             Societiespersonnel societiesPersonnel = new Societiespersonnel();
             societiesPersonnel.setUid(uId);
-            List<Societiespersonnel> list = societiesPersonnelService.querySocietiesPersonnelByExample(societiesPersonnel,null,null);
+            List<Societiespersonnel> list = societiesPersonnelService.querySocietiesPersonnelByExample(societiesPersonnel, null, null);
             for (int i = 0; i < list.size(); i++) {
                 Societies temp = new Societies();
                 temp.setId(list.get(i).getSid());
@@ -63,7 +63,7 @@ public class UserController {
             Societiespersonnel societiesPersonnel = new Societiespersonnel();
             societiesPersonnel.setUid(userDB.getId());
             societiesPersonnel.setStatus(1);
-            List<Societiespersonnel> list = societiesPersonnelService.querySocietiesPersonnelByExample(societiesPersonnel,null,null);
+            List<Societiespersonnel> list = societiesPersonnelService.querySocietiesPersonnelByExample(societiesPersonnel, null, null);
             for (int i = 0; i < list.size(); i++) {
                 Societies temp = new Societies();
                 temp.setId(list.get(i).getSid());
@@ -109,6 +109,19 @@ public class UserController {
             return JsonResult.success(value, "修改成功");
         } catch (Exception e) {
             return JsonResult.error("", "修改失败");
+        }
+    }
+
+    @ApiOperation(value = "查询指导老师")
+    @GetMapping("getTeacher")
+    public JsonResult getTeacher() {
+        try {
+            Userinfo user = new Userinfo();
+            user.setType(2);
+            List<Userinfo> list=userService.queryUserByExample(user);
+            return JsonResult.success(list, "查询成功");
+        } catch (Exception e) {
+            return JsonResult.error("", "查询失败");
         }
     }
 }

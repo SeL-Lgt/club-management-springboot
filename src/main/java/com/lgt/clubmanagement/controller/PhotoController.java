@@ -2,10 +2,13 @@ package com.lgt.clubmanagement.controller;
 
 import com.lgt.clubmanagement.entity.Photo;
 import com.lgt.clubmanagement.entity.PhotoWithBLOBs;
+import com.lgt.clubmanagement.entity.Userinfo;
 import com.lgt.clubmanagement.service.PhotoService;
+import com.lgt.clubmanagement.service.UserService;
 import com.lgt.clubmanagement.utils.DateUtil;
 import com.lgt.clubmanagement.utils.JsonResult;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,16 +19,20 @@ import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 
-@Api(tags = "上传图片")
+@Api(tags = "相册管理")
 @RestController
-@RequestMapping(value = "photo", produces = "application/json;charset=UTF-8")
+@RequestMapping(value = "photo", produces = "application/json")
 public class PhotoController {
 
     @Autowired
     private PhotoService photoService;
 
+    @Autowired
+    private UserService userService;
+
     @ResponseBody
-    @PostMapping(value = "/saveImage")
+    @ApiOperation(value = "上传相册")
+    @PostMapping("saveImage")
     public JsonResult saveImage(String image, PhotoWithBLOBs photo, String type) {
         try {
             System.out.println(image);
@@ -50,15 +57,70 @@ public class PhotoController {
         }
     }
 
-    @PostMapping(value = "/queryPhotoByAll")
+    @ApiOperation(value = "查询社团照片")
+    @PostMapping("queryPhotoByAll")
     public JsonResult queryPhotoByAll(int sid) {
         try {
             List<PhotoWithBLOBs> list = photoService.queryPhotoByAll(sid);
+            for (PhotoWithBLOBs p : list) {
+                Userinfo userinfo = userService.queryUserById(p.getUid());
+                p.setUserinfo(userinfo);
+            }
             return JsonResult.success(list, "查询成功");
         } catch (Exception e) {
             return JsonResult.error(e, "服务器报错");
         }
     }
+
+    @ApiOperation(value = "模糊查询照片")
+    @PostMapping("queryPhotoByExample")
+    public JsonResult queryPhotoByExample(String name, Integer sid, String startTime, String endTime,Integer status) {
+        try {
+            Date start = null;
+            Date end = null;
+            if (startTime != null && !startTime.equals("")) {
+                start = DateUtil.parseDate(startTime, DateUtil.DEFAULT_FORMAT);
+            }
+            if (endTime != null && !endTime.equals("")) {
+                end = DateUtil.parseDate(endTime, DateUtil.DEFAULT_FORMAT);
+            }
+            PhotoWithBLOBs photo = new PhotoWithBLOBs();
+            photo.setName(name);
+            photo.setSid(sid);
+            photo.setStatus(status);
+            List<PhotoWithBLOBs> list = photoService.queryPhotoByExample(photo, start, end);
+            for (PhotoWithBLOBs p : list) {
+                Userinfo userinfo = userService.queryUserById(p.getUid());
+                p.setUserinfo(userinfo);
+            }
+            return JsonResult.success(list, "查询成功");
+        } catch (Exception e) {
+            return JsonResult.error(e, "服务器报错");
+        }
+    }
+
+    @ApiOperation(value = "更新照片")
+    @PostMapping("updatePhoto")
+    public JsonResult updatePhoto(PhotoWithBLOBs photo) {
+        try {
+            int count = photoService.updatePhoto(photo);
+            return JsonResult.success(count, "更新成功");
+        } catch (Exception e) {
+            return JsonResult.error(e, "更新失败");
+        }
+    }
+
+    @ApiOperation(value = "删除照片")
+    @PostMapping("deletePhoto")
+    public JsonResult deletePhoto(Integer id) {
+        try {
+            int count = photoService.deletePhoto(id);
+            return JsonResult.success(count, "删除成功");
+        } catch (Exception e) {
+            return JsonResult.error(e, "删除失败");
+        }
+    }
+
 
     //base64字符串转化成图片
     public static boolean GenerateImage(String imgStr, String imageName, String type) {
@@ -86,6 +148,4 @@ public class PhotoController {
             return false;
         }
     }
-
-
 }

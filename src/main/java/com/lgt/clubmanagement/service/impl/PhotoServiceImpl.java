@@ -23,12 +23,12 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public int updatePhoto(PhotoWithBLOBs photo) {
-        return photoMapper.updateByPrimaryKey(photo);
+        return photoMapper.updateByPrimaryKeyWithBLOBs(photo);
     }
 
     @Override
-    public int deletePhoto(PhotoWithBLOBs photo) {
-        return photoMapper.updateByPrimaryKey(photo);
+    public int deletePhoto(Integer id) {
+        return photoMapper.deleteByPrimaryKey(id);
     }
 
     @Override

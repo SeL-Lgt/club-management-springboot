@@ -30,7 +30,7 @@ public interface PhotoService {
      * @param photo
      * @return
      */
-    int deletePhoto(PhotoWithBLOBs photo);
+    int deletePhoto(Integer id);
 
     /**
      * 查询社团照片
