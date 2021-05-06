@@ -2,7 +2,9 @@ package com.lgt.clubmanagement.controller;
 
 import com.lgt.clubmanagement.entity.Funding;
 import com.lgt.clubmanagement.entity.Photo;
+import com.lgt.clubmanagement.entity.Societies;
 import com.lgt.clubmanagement.service.FundingService;
+import com.lgt.clubmanagement.service.SocietiesService;
 import com.lgt.clubmanagement.utils.DateUtil;
 import com.lgt.clubmanagement.utils.JsonResult;
 import io.swagger.annotations.Api;
@@ -23,6 +25,9 @@ import java.util.List;
 public class FundingController {
     @Autowired
     private FundingService fundingService;
+    @Autowired
+    private SocietiesService societiesService;
+
 
     @ApiOperation(value = "发布任务")
     @PostMapping("createFunding")
@@ -41,8 +46,25 @@ public class FundingController {
 
     @ApiOperation(value = "更新任务状态")
     @PostMapping("updateFunding")
-    public JsonResult updateFunding(Funding funding) {
+    public JsonResult updateFunding(Funding funding, Integer type) {
         try {
+            Date data = new Date();
+            funding.setDdate(DateUtil.parseDate(DateUtil.format(data, DateUtil.DEFAULT_FORMAT), DateUtil.DEFAULT_FORMAT));
+            if (funding.getStatus().equals("2")) {
+                Societies societies = new Societies();
+                societies.setId(funding.getSid());
+                societies = societiesService.querySocietiesByCondition(societies).get(0);
+                if (type == 1) {
+                    if (societies.getMoney() < funding.getMoney()) {
+                        return JsonResult.error("", "社团经费不足");
+                    } else {
+                        societies.setMoney(societies.getMoney() - funding.getMoney());
+                    }
+                } else {
+                    societies.setMoney(societies.getMoney() + funding.getMoney());
+                }
+                societiesService.updateSocietiesInfo(societies);
+            }
             int count = fundingService.updateFunding(funding);
             return JsonResult.success(count, "更新成功");
         } catch (Exception e) {
@@ -74,6 +96,12 @@ public class FundingController {
     public JsonResult queryFundingByMy(String dNumber) {
         try {
             List<Funding> list = fundingService.queryFundingByMy(dNumber);
+            for (Funding funding : list) {
+                Societies societies = new Societies();
+                societies.setId(funding.getSid());
+                societies = societiesService.querySocietiesByCondition(societies).get(0);
+                funding.setSocieties(societies);
+            }
             return JsonResult.success(list, "查询成功");
         } catch (Exception e) {
             return JsonResult.error(e, "查询失败");

@@ -30,16 +30,19 @@ public class FundingServiceImpl implements FundingService {
         FundingExample example = new FundingExample();
         FundingExample.Criteria criteria = example.createCriteria();
         criteria.andSidEqualTo(funding.getSid());
-        if (funding.getStatus() != null && funding.getStatus().equals("")) {
+        if (funding.getStatus() != null && !funding.getStatus().equals("")) {
             criteria.andStatusEqualTo(funding.getStatus());
         }
         if (max != null && min != null) {
             criteria.andMoneyBetween(min, max);
+        } else if (min != null) {
+            criteria.andMoneyGreaterThanOrEqualTo(min);
         }
         if (startTime != null && endTime != null) {
             criteria.andUdateBetween(startTime, endTime);
         }
-        return fundingMapper.selectByExample(example);
+
+        return fundingMapper.selectByExampleWithBLOBs(example);
     }
 
     @Override
@@ -47,6 +50,6 @@ public class FundingServiceImpl implements FundingService {
         FundingExample example = new FundingExample();
         FundingExample.Criteria criteria = example.createCriteria();
         criteria.andDnumberEqualTo(dNumber);
-        return fundingMapper.selectByExample(example);
+        return fundingMapper.selectByExampleWithBLOBs(example);
     }
 }

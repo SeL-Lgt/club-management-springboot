@@ -88,7 +88,7 @@ public class SocietiesPersonnelController {
 
     @ApiOperation(value = "模糊查询社团成员")
     @PostMapping("querySocietiesPersonnelByExample")
-    public JsonResult querySocietiesPersonnelByExample(Integer sid, Integer job, String startTime, String endTime, String name) {
+    public JsonResult querySocietiesPersonnelByExample(Integer sid, Integer job, String startTime, String endTime, String name, Integer status) {
         try {
             Userinfo userinfo = new Userinfo();
             userinfo.setName(name);
@@ -108,6 +108,7 @@ public class SocietiesPersonnelController {
                 societiespersonnel.setUid(list.get(i).getId());
                 societiespersonnel.setSid(sid);
                 societiespersonnel.setJob(job);
+                societiespersonnel.setStatus(status);
                 List<Societiespersonnel> sList = societiesPersonnelService.querySocietiesPersonnelByExample(societiespersonnel, start, end);
                 list.get(i).setSocietiesPersonnel(sList);
             }

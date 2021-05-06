@@ -26,6 +26,16 @@ public class Funding {
 
     private String introduction;
 
+    private Societies societies;
+
+    public Societies getSocieties() {
+        return societies;
+    }
+
+    public void setSocieties(Societies societies) {
+        this.societies = societies;
+    }
+
     public Integer getId() {
         return id;
     }
