@@ -54,6 +54,7 @@ public class FundingController {
                 Societies societies = new Societies();
                 societies.setId(funding.getSid());
                 societies = societiesService.querySocietiesByCondition(societies).get(0);
+                //判断是社长分配还是老师分配。1：为社长 2：为老师
                 if (type == 1) {
                     if (societies.getMoney() < funding.getMoney()) {
                         return JsonResult.error("", "社团经费不足");
@@ -67,9 +68,7 @@ public class FundingController {
             }
             int count = fundingService.updateFunding(funding);
             return JsonResult.success(count, "更新成功");
-        } catch (Exception e) {
-            return JsonResult.error(e, "更新失败");
-        }
+        } catch (Exception e) { return JsonResult.error(e, "更新失败"); }
     }
 
     @ApiOperation(value = "查询所有任务（模糊查询）")

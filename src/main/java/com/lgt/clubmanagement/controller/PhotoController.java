@@ -35,8 +35,6 @@ public class PhotoController {
     @PostMapping("saveImage")
     public JsonResult saveImage(String image, PhotoWithBLOBs photo, String type) {
         try {
-            System.out.println(image);
-            System.out.println(photo.toString());
             //输出base64 数据,截取","之后的值进行转换
             String str = image.substring(image.indexOf(",") + 1);
             //System.currentTimeMillis()意思是获取当前系统的时间戳给图片命名
@@ -50,11 +48,8 @@ public class PhotoController {
             photo.setDate(DateUtil.parseDate(DateUtil.format(data, DateUtil.DEFAULT_FORMAT), DateUtil.DEFAULT_FORMAT));
             photo.setPath(imageName);
             photoService.createPhoto(photo);
-
             return JsonResult.success("", "创建成功");
-        } catch (Exception e) {
-            return JsonResult.error(e, "服务器报错");
-        }
+        } catch (Exception e) { return JsonResult.error(e, "服务器报错"); }
     }
 
     @ApiOperation(value = "查询社团照片")

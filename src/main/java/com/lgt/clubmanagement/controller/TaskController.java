@@ -207,6 +207,16 @@ public class TaskController {
                     societies.setId(task.getSid());
                     societies = societiesService.querySocietiesByCondition(societies).get(0);
                     societies.setStatus("1");
+
+                    Userinfo userinfo = userService.queryUserByNumber(societies.getFounder());
+                    Societiespersonnel societiespersonnel = new Societiespersonnel();
+                    societiespersonnel.setSid(task.getSid());
+                    societiespersonnel.setUid(userinfo.getId());
+
+                    societiespersonnel = societiesPersonnelService.querySocietiesPersonnelByExample(societiespersonnel, null, null).get(0);
+                    societiespersonnel.setStatus(1);
+                    societiesPersonnelService.updateSocietiesPersonnel(societiespersonnel);
+
                     societiesService.updateSocietiesInfo(societies);
                 }
             }

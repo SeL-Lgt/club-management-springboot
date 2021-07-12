@@ -75,7 +75,7 @@ public class SocietiesController {
             societiesPersonnel.setSid(sId);
             societiesPersonnel.setDate(data);
             societiesPersonnel.setJob(3);
-            societiesPersonnel.setStatus(1);
+            societiesPersonnel.setStatus(0);
             societiesPersonnelService.addSocietiesPersonnel(societiesPersonnel);
 
             // 添加任务--创建社团任务

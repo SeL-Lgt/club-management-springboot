@@ -29,7 +29,9 @@ public class FundingServiceImpl implements FundingService {
     public List<Funding> queryFundingByAll(Funding funding, Double min, Double max, Date startTime, Date endTime) {
         FundingExample example = new FundingExample();
         FundingExample.Criteria criteria = example.createCriteria();
-        criteria.andSidEqualTo(funding.getSid());
+        if (funding.getSid() != null && !funding.getSid().equals("")) {
+            criteria.andSidEqualTo(funding.getSid());
+        }
         if (funding.getStatus() != null && !funding.getStatus().equals("")) {
             criteria.andStatusEqualTo(funding.getStatus());
         }
